@@ -1,0 +1,40 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files
+.env*
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# 源图片文件夹（不需要上传到GitHub）
+/图片库/
+/Suzhou/
+
+# 系统文件
+.DS_Store
+*.zip
+
+# 文档文件（可选，如果需要可以保留）
+# 图片问题清单.md
+# 图片替换清单.md
+# 部署指南.md
