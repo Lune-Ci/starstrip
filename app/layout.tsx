@@ -2,6 +2,7 @@ import type React from "react"
 import type { Metadata, Viewport } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import "./globals.css"
 import { AuthSessionProvider } from "@/components/auth-session-provider"
 
@@ -49,6 +50,7 @@ export default function RootLayout({
       <body className={`font-sans antialiased`}>
         <AuthSessionProvider>{children}</AuthSessionProvider>
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   )
