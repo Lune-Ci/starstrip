@@ -256,6 +256,8 @@ export const translations = {
 
     // Navigation
     navigation: "Navigation",
+    openMenu: "Open menu",
+    changeLanguage: "Change language",
     closeMenu: "Close menu",
     // Favorites
     myFavorites: "My Favorites",
@@ -463,6 +465,8 @@ export const translations = {
 
     // Navigation
     navigation: "导航",
+    openMenu: "打开菜单",
+    changeLanguage: "切换语言",
     closeMenu: "关闭菜单",
     // Favorites
     myFavorites: "我的收藏",
@@ -663,6 +667,8 @@ export const translations = {
 
     // Navigation
     navigation: "Navegación",
+    openMenu: "Abrir menú",
+    changeLanguage: "Cambiar idioma",
     closeMenu: "Cerrar menú",
     // Favorites
     myFavorites: "Mis Favoritos",
@@ -687,6 +693,8 @@ export const translations = {
   fr: {
     // Navigation
     navigation: "Navigation",
+    openMenu: "Ouvrir le menu",
+    changeLanguage: "Changer de langue",
     closeMenu: "Fermer le menu",
     // Navigation
     home: "Accueil",
@@ -1134,6 +1142,8 @@ export const translations = {
 
     // Navigation
     navigation: "التنقل",
+    openMenu: "فتح القائمة",
+    changeLanguage: "تغيير اللغة",
     closeMenu: "إغلاق القائمة",
     // Favorites
     myFavorites: "المفضلات الخاصة بي",
@@ -1157,6 +1167,8 @@ export const translations = {
   ru: {
     // Navigation
     navigation: "Навигация",
+    openMenu: "Открыть меню",
+    changeLanguage: "Сменить язык",
     closeMenu: "Закрыть меню",
     // Navigation
     home: "Главная",

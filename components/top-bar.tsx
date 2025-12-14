@@ -4,11 +4,12 @@ import { Menu, Globe } from "lucide-react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { translations, type Language } from "@/lib/translations"
 
 interface TopBarProps {
   onMenuClick: () => void
-  currentLanguage: string
-  onLanguageChange: (lang: string) => void
+  currentLanguage: Language
+  onLanguageChange: (lang: Language) => void
 }
 
 const languages = [
@@ -21,6 +22,7 @@ const languages = [
 ]
 
 export function TopBar({ onMenuClick, currentLanguage, onLanguageChange }: TopBarProps) {
+  const t = translations[currentLanguage]
   return (
     <header className="fixed top-0 left-0 right-0 z-50 h-14 md:h-16 bg-[#bddaea] border-b border-white/30">
       <div className="flex items-center justify-between h-full px-3 md:px-6">
@@ -31,7 +33,7 @@ export function TopBar({ onMenuClick, currentLanguage, onLanguageChange }: TopBa
           className="hover:bg-white/20 text-[#1a3a52] h-8 w-8 md:h-10 md:w-10"
         >
           <Menu className="h-5 w-5 md:h-6 md:w-6" />
-          <span className="sr-only">Open menu</span>
+          <span className="sr-only">{t.openMenu}</span>
         </Button>
 
         <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-1 md:gap-2">
@@ -49,14 +51,14 @@ export function TopBar({ onMenuClick, currentLanguage, onLanguageChange }: TopBa
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" size="icon" className="hover:bg-white/20 text-[#1a3a52] h-8 w-8 md:h-10 md:w-10">
               <Globe className="h-4 w-4 md:h-5 md:w-5" />
-              <span className="sr-only">Change language</span>
+              <span className="sr-only">{t.changeLanguage}</span>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="liquid-glass text-sm md:text-base">
             {languages.map((lang) => (
               <DropdownMenuItem
                 key={lang.code}
-                onClick={() => onLanguageChange(lang.code)}
+                onClick={() => onLanguageChange(lang.code as Language)}
                 className={currentLanguage === lang.code ? "bg-primary/10" : ""}
               >
                 {lang.name}
