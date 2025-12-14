@@ -22,6 +22,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { useLanguageStore } from "@/lib/language-store";
 import { translations } from "@/lib/translations";
+import { getCountryLabel, getInterestLabel } from "@/lib/utils";
 
 const countries = [
   { code: "US", name: "United States" },
@@ -67,7 +68,7 @@ export default function UserCenterPage() {
   const [savedRoutes, setSavedRoutes] = useState<SavedRoute[]>([]);
   const [isClient, setIsClient] = useState(false);
   const { language } = useLanguageStore();
-  const t = translations[language];
+  const t = translations[language] as any;
 
   const handleSave = () => {
     updateProfile({ hasCompletedProfile: true });
@@ -158,7 +159,7 @@ export default function UserCenterPage() {
                         value={country.code}
                         className="text-sm md:text-base"
                       >
-                        {country.name}
+                        {getCountryLabel(country.code, language)}
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -339,7 +340,7 @@ export default function UserCenterPage() {
                       }`}
                       onClick={() => toggleInterest(interest)}
                     >
-                      {interest}
+                      {getInterestLabel(interest, language)}
                       {profile.interests.includes(interest) && (
                         <Check className="ml-1 md:ml-2 h-3 w-3 md:h-4 md:w-4" />
                       )}

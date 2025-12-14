@@ -26,6 +26,7 @@ import {
   AccordionTrigger,
   AccordionContent,
 } from "@/components/ui/accordion";
+import { getAttractionName } from "@/lib/utils";
 
 export default function AttractionsPage() {
   const { language } = useLanguageStore();
@@ -127,8 +128,12 @@ export default function AttractionsPage() {
       selectedType === "all" || attraction.type === selectedType;
     const matchesSearch =
       searchQuery === "" ||
-      attraction.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      attraction.city.toLowerCase().includes(searchQuery.toLowerCase());
+      getAttractionName(attraction.id, attraction.name, language)
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase()) ||
+      getCityLabel(attraction.city)
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase());
 
     return matchesCity && matchesRegion && matchesType && matchesSearch;
   });

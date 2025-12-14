@@ -21,6 +21,7 @@ import { useRouter } from "next/navigation";
 import { generateRoute, calculateRouteTotals } from "@/lib/route-generator";
 import type { ItineraryDay } from "@/lib/route-planner-store";
 import { useAuthStore } from "@/lib/auth-store";
+import { getAttractionName, getMealName } from "@/lib/utils";
 import {
   Dialog,
   DialogContent,
@@ -474,7 +475,11 @@ export default function ItineraryPage() {
                               ? fallbackImageByType(attraction.type)
                               : attraction.image
                           }
-                          alt={attraction.name}
+                          alt={getAttractionName(
+                            attraction.id,
+                            attraction.name,
+                            language
+                          )}
                           className="w-full h-full object-cover"
                           onError={(e) => {
                             const img = e.currentTarget as HTMLImageElement;
@@ -488,7 +493,11 @@ export default function ItineraryPage() {
                       <div className="flex-1 min-w-0">
                         <div className="flex items-start justify-between gap-2 mb-2">
                           <h4 className="font-semibold text-[#1a3a52] text-sm md:text-base truncate">
-                            {attraction.name}
+                            {getAttractionName(
+                              attraction.id,
+                              attraction.name,
+                              language
+                            )}
                           </h4>
                           <Badge variant="outline" className="text-xs shrink-0">
                             {getTypeLabel(attraction.type)}
@@ -534,7 +543,11 @@ export default function ItineraryPage() {
                                       ? fallbackMealImageByType(meal.type)
                                       : meal.image
                                   }
-                                  alt={meal.name}
+                                  alt={getMealName(
+                                    meal.id,
+                                    meal.name,
+                                    language
+                                  )}
                                   className="w-full h-full object-cover"
                                   onError={(e) => {
                                     const img =
@@ -550,7 +563,7 @@ export default function ItineraryPage() {
                             )}
                             <div className="flex items-start justify-between gap-2 mb-1">
                               <h6 className="font-medium text-[#1a3a52] text-xs md:text-sm">
-                                {meal.name}
+                                {getMealName(meal.id, meal.name, language)}
                               </h6>
                               <Badge
                                 variant="secondary"

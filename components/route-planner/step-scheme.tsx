@@ -80,7 +80,7 @@ export function StepScheme({
 }: StepSchemeProps) {
   const [hoveredScheme, setHoveredScheme] = useState<RouteScheme | null>(null);
   const { language } = useLanguageStore();
-  const t = translations[language];
+  const t = translations[language] as any;
 
   // Calculate preview for each scheme if we have location and dates
   const schemePreviews = useMemo(() => {
@@ -98,7 +98,11 @@ export function StepScheme({
 
     schemes.forEach((scheme) => {
       try {
-        const itinerary = generateRoute(startLocation, dateRange, scheme.id);
+        const itinerary = generateRoute(
+          startLocation,
+          { from: dateRange!.from!, to: dateRange!.to! },
+          scheme.id
+        );
         const { totalCost, totalCarbon } = calculateRouteTotals(
           itinerary,
           scheme.id

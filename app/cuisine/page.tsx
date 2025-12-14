@@ -30,7 +30,7 @@ import { Button } from "@/components/ui/button";
 import { Heart, MapPin, DollarSign, Leaf } from "lucide-react";
 import { useFavoritesStore } from "@/lib/favorites-store";
 import { useAuthStore } from "@/lib/auth-store";
-import { cn } from "@/lib/utils";
+import { cn, getMealName } from "@/lib/utils";
 import {
   Dialog,
   DialogContent,
@@ -51,18 +51,12 @@ export default function CuisinePage() {
     useFavoritesStore();
   const auth = useAuthStore();
 
-  const cities = [
-    "all",
-    ...Array.from(new Set(mealsData.map((m) => m.city))),
-  ];
+  const cities = ["all", ...Array.from(new Set(mealsData.map((m) => m.city)))];
   const cuisines = [
     "all",
     ...Array.from(new Set(mealsData.map((m) => m.cuisine))),
   ];
-  const types = [
-    "all",
-    ...Array.from(new Set(mealsData.map((m) => m.type))),
-  ];
+  const types = ["all", ...Array.from(new Set(mealsData.map((m) => m.type)))];
 
   const getCuisineLabel = (cuisine: string): string => {
     switch (cuisine) {
@@ -158,12 +152,22 @@ export default function CuisinePage() {
     const matchesType = selectedType === "all" || meal.type === selectedType;
     const matchesSearch =
       searchQuery === "" ||
-      meal.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      meal.city.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      meal.cuisine.toLowerCase().includes(searchQuery.toLowerCase());
+      getMealName(meal.id, meal.name, language)
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase()) ||
+      getCityLabel(meal.city)
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase()) ||
+      getCuisineLabel(meal.cuisine)
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase());
 
     return (
-      matchesCity && matchesRegion && matchesCuisine && matchesType && matchesSearch
+      matchesCity &&
+      matchesRegion &&
+      matchesCuisine &&
+      matchesType &&
+      matchesSearch
     );
   });
 
@@ -270,11 +274,11 @@ export default function CuisinePage() {
 
             <Select value={selectedCuisine} onValueChange={setSelectedCuisine}>
               <SelectTrigger className="bg-white/60">
-                <SelectValue placeholder="Select cuisine" />
+                <SelectValue placeholder={t.selectCuisine} />
               </SelectTrigger>
               <SelectContent className="liquid-glass">
                 <SelectItem key="all" value="all">
-                  All Cuisines
+                  {t.allCuisines}
                 </SelectItem>
                 {cuisines
                   .filter((c) => c !== "all")
@@ -319,7 +323,7 @@ export default function CuisinePage() {
                 <div className="relative aspect-[4/3] overflow-hidden">
                   <img
                     src={resolveMealImage(meal)}
-                    alt={meal.name}
+                    alt={getMealName(meal.id, meal.name, language)}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                     onError={(e) => {
                       const img = e.currentTarget as HTMLImageElement;
@@ -350,7 +354,7 @@ export default function CuisinePage() {
 
                 <div className="p-4">
                   <h3 className="text-xl font-bold text-[#1a3a52] mb-2 line-clamp-1">
-                    {meal.name}
+                    {getMealName(meal.id, meal.name, language)}
                   </h3>
 
                   <div className="flex items-center gap-2 text-[#4a6b84] mb-3">
@@ -396,5 +400,3 @@ export default function CuisinePage() {
     </MainLayout>
   );
 }
-
-

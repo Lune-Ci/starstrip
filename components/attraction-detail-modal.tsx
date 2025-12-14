@@ -18,7 +18,7 @@ import {
   ExternalLink,
 } from "lucide-react";
 import { useFavoritesStore } from "@/lib/favorites-store";
-import { cn } from "@/lib/utils";
+import { cn, getAttractionName } from "@/lib/utils";
 import { useLanguageStore } from "@/lib/language-store";
 import { translations } from "@/lib/translations";
 
@@ -77,6 +77,64 @@ export function AttractionDetailModal({
     return src;
   };
 
+  const getTypeLabel = (type: string): string => {
+    switch (type) {
+      case "Historical Site":
+        return t.typeHistoricalSite;
+      case "Urban Exploration":
+        return t.typeUrbanExploration;
+      case "Natural Scenery":
+        return t.typeNaturalScenery;
+      case "Cultural Experience":
+        return t.typeCulturalExperience;
+      case "Entertainment":
+        return t.typeEntertainment;
+      case "Wildlife":
+        return t.typeWildlife;
+      case "Fine Dining":
+        return t.typeFineDining;
+      case "Local Restaurant":
+        return t.typeLocalRestaurant;
+      case "Street Food":
+        return t.typeStreetFood;
+      case "Tea House":
+        return t.typeTeaHouse;
+      default:
+        return type;
+    }
+  };
+
+  const getCityLabel = (city: string): string => {
+    switch (city) {
+      case "Beijing":
+        return t.cityBeijing;
+      case "Shanghai":
+        return t.cityShanghai;
+      case "Xi'an":
+        return t.cityXian;
+      case "Guilin":
+        return t.cityGuilin;
+      case "Chengdu":
+        return t.cityChengdu;
+      case "Hangzhou":
+        return t.cityHangzhou;
+      case "Suzhou":
+        return t.citySuzhou;
+      case "Nanjing":
+        return t.cityNanjing;
+      case "Wuzhen":
+        return t.cityWuzhen;
+      case "Guangzhou":
+        return t.cityGuangzhou;
+      case "Hong Kong":
+        return t.cityHongKong;
+      case "Macau":
+        return t.cityMacau;
+      default:
+        return city;
+    }
+  };
+
   const mapUrl = `https://www.openstreetmap.org/?mlat=${attraction.coordinates.lat}&mlon=${attraction.coordinates.lng}#map=15/${attraction.coordinates.lat}/${attraction.coordinates.lng}`;
 
   return (
@@ -84,7 +142,7 @@ export function AttractionDetailModal({
       <DialogContent className="liquid-glass max-w-3xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="text-2xl text-[#1a3a52]">
-            {attraction.name}
+            {getAttractionName(attraction.id, attraction.name, language)}
           </DialogTitle>
         </DialogHeader>
 
@@ -93,7 +151,7 @@ export function AttractionDetailModal({
           <div className="relative aspect-[16/9] overflow-hidden rounded-lg">
             <img
               src={resolveAttractionImage()}
-              alt={attraction.name}
+              alt={getAttractionName(attraction.id, attraction.name, language)}
               className="w-full h-full object-cover"
               onError={(e) => {
                 const img = e.currentTarget as HTMLImageElement;
@@ -103,14 +161,17 @@ export function AttractionDetailModal({
               }}
             />
             <Badge className="absolute top-3 left-3 bg-[#5ba3d0] text-white">
-              {attraction.type}
+              {getTypeLabel(attraction.type)}
             </Badge>
           </div>
 
           {/* Location */}
           <div className="flex items-center gap-2 text-[#4a6b84]">
             <MapPin className="h-5 w-5 text-[#5ba3d0]" />
-            <span className="font-medium">{attraction.city}, China</span>
+            <span className="font-medium">
+              {getCityLabel(attraction.city)}
+              {t.countryChina ? `, ${t.countryChina}` : ""}
+            </span>
           </div>
 
           {/* Stats */}

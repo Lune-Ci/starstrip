@@ -45,43 +45,43 @@ export function getCarbonReductionTips(carbonFootprint: number): CarbonTip[] {
   const tips: CarbonTip[] = [
     {
       icon: "Train",
-      title: "High-Speed Rail",
-      description: "Use trains for short distances",
+      title: "tipHighSpeedRailTitle",
+      description: "tipHighSpeedRailDesc",
     },
     {
       icon: "Building",
-      title: "Eco Hotels",
-      description: "Choose sustainable accommodation",
+      title: "tipEcoHotelsTitle",
+      description: "tipEcoHotelsDesc",
     },
     {
       icon: "Bus",
-      title: "Public Transport",
-      description: "Prefer buses and trains",
+      title: "tipPublicTransportTitle",
+      description: "tipPublicTransportDesc",
     },
     {
       icon: "Package",
-      title: "Pack Light",
-      description: "Reduce luggage weight",
+      title: "tipPackLightTitle",
+      description: "tipPackLightDesc",
     },
     {
       icon: "Recycle",
-      title: "Reusable Items",
-      description: "Bring water bottle and bag",
+      title: "tipReusableItemsTitle",
+      description: "tipReusableItemsDesc",
     },
     {
       icon: "Utensils",
-      title: "Local Food",
-      description: "Support local restaurants",
+      title: "tipLocalFoodTitle",
+      description: "tipLocalFoodDesc",
     },
     {
       icon: "Plane",
-      title: "Direct Flights",
-      description: "Avoid connections",
+      title: "tipDirectFlightsTitle",
+      description: "tipDirectFlightsDesc",
     },
     {
       icon: "Clock",
-      title: "Off-Peak Travel",
-      description: "Visit during quieter times",
+      title: "tipOffPeakTravelTitle",
+      description: "tipOffPeakTravelDesc",
     },
   ]
 
@@ -89,13 +89,13 @@ export function getCarbonReductionTips(carbonFootprint: number): CarbonTip[] {
     return [
       {
         icon: "Calendar",
-        title: "Longer Trips",
-        description: "Extend trip duration",
+        title: "tipLongerTripsTitle",
+        description: "tipLongerTripsDesc",
       },
       {
         icon: "Mountain",
-        title: "Scenic Routes",
-        description: "Choose train routes",
+        title: "tipScenicRoutesTitle",
+        description: "tipScenicRoutesDesc",
       },
       ...tips.slice(0, 6),
     ]

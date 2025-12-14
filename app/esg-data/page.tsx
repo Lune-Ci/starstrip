@@ -4,6 +4,8 @@ import { useState } from "react";
 import { MainLayout } from "@/components/main-layout";
 import { Card } from "@/components/ui/card";
 import { useESGStore } from "@/lib/esg-store";
+import { useLanguageStore } from "@/lib/language-store";
+import { translations } from "@/lib/translations";
 import {
   getCarbonReductionTips,
   getEmissionComparison,
@@ -61,10 +63,13 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
 
 export default function ESGDataPage() {
   const { trips, getTotalCarbon, getYearlyCarbon } = useESGStore();
+  const { language } = useLanguageStore();
+  const t = translations[language] as any;
   const currentYear = new Date().getFullYear();
   const yearlyCarbon = getYearlyCarbon(currentYear);
   const totalCarbon = getTotalCarbon();
   const [isTripHistoryOpen, setIsTripHistoryOpen] = useState(false);
+  const locale = language === "zh" ? "zh-CN" : language;
 
   // Calculate breakdown by category
   const breakdown = trips.reduce(
@@ -78,10 +83,18 @@ export default function ESGDataPage() {
   );
 
   const pieData = [
-    { name: "Flights", value: breakdown.flights, color: "#e74c3c" },
-    { name: "Trains", value: breakdown.trains, color: "#5ba3d0" },
-    { name: "Accommodation", value: breakdown.accommodation, color: "#f39c12" },
-    { name: "Activities", value: breakdown.activities, color: "#27ae60" },
+    { name: t.flights, value: Math.round(breakdown.flights), color: "#e74c3c" },
+    { name: t.trains, value: Math.round(breakdown.trains), color: "#5ba3d0" },
+    {
+      name: t.accommodation,
+      value: Math.round(breakdown.accommodation),
+      color: "#f39c12",
+    },
+    {
+      name: t.activities,
+      value: Math.round(breakdown.activities),
+      color: "#27ae60",
+    },
   ].filter((item) => item.value > 0);
 
   // Monthly data for the current year
@@ -96,7 +109,9 @@ export default function ESGDataPage() {
       0
     );
     return {
-      month: new Date(2025, i).toLocaleString("en", { month: "short" }),
+      month: new Date(currentYear, i).toLocaleString(locale, {
+        month: "short",
+      }),
       carbon: Math.round(carbon),
     };
   });
@@ -109,10 +124,10 @@ export default function ESGDataPage() {
       <div className="container mx-auto px-4 py-6 md:py-8 max-w-7xl">
         <div className="mb-6 md:mb-8">
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#1a3a52] mb-2 md:mb-3">
-            ESG Carbon Dashboard
+            {t.esgCarbonDashboard}
           </h1>
           <p className="text-base md:text-lg text-[#4a6b84]">
-            Track your travel carbon footprint and discover ways to reduce it
+            {t.trackCarbonFootprint}
           </p>
           <div className="mt-4 flex flex-wrap gap-3">
             <Button
@@ -120,14 +135,14 @@ export default function ESGDataPage() {
               onClick={() => (window.location.href = "/")}
               className="border-[#5ba3d0] text-[#5ba3d0] hover:bg-[#5ba3d0]/10"
             >
-              Back to Home
+              {t.backToHome}
             </Button>
             <Button
               variant="outline"
               onClick={() => (window.location.href = "/route-planner?reset=1")}
               className="border-[#5ba3d0] text-[#5ba3d0] hover:bg-[#5ba3d0]/10"
             >
-              Generate New Trip
+              {t.generateNewTrip}
             </Button>
           </div>
         </div>
@@ -136,10 +151,10 @@ export default function ESGDataPage() {
           <Card className="liquid-glass border-0 p-8 md:p-12 text-center">
             <Leaf className="h-12 w-12 md:h-16 md:w-16 text-[#5ba3d0] mx-auto mb-3 md:mb-4" />
             <h3 className="text-xl md:text-2xl font-semibold text-[#1a3a52] mb-2">
-              Start Your Journey
+              {t.startJourney}
             </h3>
             <p className="text-sm md:text-base text-[#4a6b84] mb-4">
-              Plan your first trip to start tracking your carbon footprint
+              {t.planFirstTrip}
             </p>
             <div className="flex justify-center gap-3">
               <Button
@@ -147,7 +162,7 @@ export default function ESGDataPage() {
                 onClick={() => (window.location.href = "/")}
                 className="border-[#5ba3d0] text-[#5ba3d0] hover:bg-[#5ba3d0]/10"
               >
-                Back to Home
+                {t.backToHome}
               </Button>
               <Button
                 onClick={() =>
@@ -155,7 +170,7 @@ export default function ESGDataPage() {
                 }
                 className="bg-[#5ba3d0] hover:bg-[#4a92bf] text-white"
               >
-                Start Planning
+                {t.startPlanning}
               </Button>
             </div>
           </Card>
@@ -169,14 +184,14 @@ export default function ESGDataPage() {
                     <Leaf className="h-4 w-4 md:h-5 md:w-5 text-[#5ba3d0]" />
                   </div>
                   <h3 className="font-semibold text-[#4a6b84] text-xs md:text-base">
-                    {currentYear} Total
+                    {currentYear} {t.total}
                   </h3>
                 </div>
                 <p className="text-2xl md:text-3xl font-bold text-[#1a3a52]">
-                  {Math.round(yearlyCarbon)} kg
+                  {Math.round(yearlyCarbon)} {t.kg}
                 </p>
                 <p className="text-xs md:text-sm text-[#4a6b84] mt-1">
-                  CO₂ emissions
+                  {t.co2Emissions}
                 </p>
               </Card>
 
@@ -186,14 +201,14 @@ export default function ESGDataPage() {
                     <TreePine className="h-4 w-4 md:h-5 md:w-5 text-green-600" />
                   </div>
                   <h3 className="font-semibold text-[#4a6b84] text-xs md:text-base">
-                    Trees
+                    {t.trees}
                   </h3>
                 </div>
                 <p className="text-2xl md:text-3xl font-bold text-[#1a3a52]">
                   {comparison.trees}
                 </p>
                 <p className="text-xs md:text-sm text-[#4a6b84] mt-1">
-                  to offset
+                  {t.toOffset}
                 </p>
               </Card>
 
@@ -203,14 +218,14 @@ export default function ESGDataPage() {
                     <Plane className="h-4 w-4 md:h-5 md:w-5 text-orange-600" />
                   </div>
                   <h3 className="font-semibold text-[#4a6b84] text-xs md:text-base">
-                    Flights
+                    {t.flights}
                   </h3>
                 </div>
                 <p className="text-2xl md:text-3xl font-bold text-[#1a3a52]">
                   {comparison.flights}
                 </p>
                 <p className="text-xs md:text-sm text-[#4a6b84] mt-1">
-                  equivalent
+                  {t.equivalent}
                 </p>
               </Card>
 
@@ -220,14 +235,14 @@ export default function ESGDataPage() {
                     <TrendingDown className="h-4 w-4 md:h-5 md:w-5 text-blue-600" />
                   </div>
                   <h3 className="font-semibold text-[#4a6b84] text-xs md:text-base">
-                    Trips
+                    {t.trips}
                   </h3>
                 </div>
                 <p className="text-2xl md:text-3xl font-bold text-[#1a3a52]">
                   {trips.length}
                 </p>
                 <p className="text-xs md:text-sm text-[#4a6b84] mt-1">
-                  recorded
+                  {t.recorded}
                 </p>
               </Card>
             </div>
@@ -235,7 +250,7 @@ export default function ESGDataPage() {
             {/* Monthly Carbon Trend */}
             <Card className="liquid-glass border-0 p-4 md:p-6">
               <h2 className="text-xl md:text-2xl font-bold text-[#1a3a52] mb-4 md:mb-6">
-                Monthly Carbon Emissions ({currentYear})
+                {t.monthlyCarbonEmissions.replace("{year}", currentYear)}
               </h2>
               <ResponsiveContainer
                 width="100%"
@@ -272,7 +287,7 @@ export default function ESGDataPage() {
                   <YAxis
                     stroke="#4a6b84"
                     label={{
-                      value: "kg CO₂",
+                      value: `${t.kg} ${t.co2}`,
                       angle: -90,
                       position: "insideLeft",
                     }}
@@ -293,7 +308,7 @@ export default function ESGDataPage() {
             <div className="grid lg:grid-cols-2 gap-6">
               <Card className="liquid-glass border-0 p-6">
                 <h2 className="text-2xl font-bold text-[#1a3a52] mb-6">
-                  Emissions by Category
+                  {t.emissionsByCategory}
                 </h2>
                 {pieData.length > 0 ? (
                   <ResponsiveContainer width="100%" height={300}>
@@ -325,33 +340,37 @@ export default function ESGDataPage() {
                   </ResponsiveContainer>
                 ) : (
                   <p className="text-[#4a6b84] text-center py-12">
-                    No data available
+                    {t.noDataAvailable}
                   </p>
                 )}
 
                 <div className="grid grid-cols-2 gap-4 mt-6">
                   <div className="bg-white/60 rounded-lg p-3">
-                    <p className="text-sm text-[#4a6b84] mb-1">Flights</p>
+                    <p className="text-sm text-[#4a6b84] mb-1">{t.flights}</p>
                     <p className="text-xl font-bold text-[#1a3a52]">
-                      {Math.round(breakdown.flights)} kg
+                      {Math.round(breakdown.flights)} {t.kg}
                     </p>
                   </div>
                   <div className="bg-white/60 rounded-lg p-3">
-                    <p className="text-sm text-[#4a6b84] mb-1">Trains</p>
+                    <p className="text-sm text-[#4a6b84] mb-1">{t.trains}</p>
                     <p className="text-xl font-bold text-[#1a3a52]">
-                      {Math.round(breakdown.trains)} kg
+                      {Math.round(breakdown.trains)} {t.kg}
                     </p>
                   </div>
                   <div className="bg-white/60 rounded-lg p-3">
-                    <p className="text-sm text-[#4a6b84] mb-1">Accommodation</p>
+                    <p className="text-sm text-[#4a6b84] mb-1">
+                      {t.accommodation}
+                    </p>
                     <p className="text-xl font-bold text-[#1a3a52]">
-                      {Math.round(breakdown.accommodation)} kg
+                      {Math.round(breakdown.accommodation)} {t.kg}
                     </p>
                   </div>
                   <div className="bg-white/60 rounded-lg p-3">
-                    <p className="text-sm text-[#4a6b84] mb-1">Activities</p>
+                    <p className="text-sm text-[#4a6b84] mb-1">
+                      {t.activities}
+                    </p>
                     <p className="text-xl font-bold text-[#1a3a52]">
-                      {Math.round(breakdown.activities)} kg
+                      {Math.round(breakdown.activities)} {t.kg}
                     </p>
                   </div>
                 </div>
@@ -364,7 +383,7 @@ export default function ESGDataPage() {
                     <Lightbulb className="h-6 w-6 text-green-600" />
                   </div>
                   <h2 className="text-2xl font-bold text-[#1a3a52]">
-                    Reduction Tips
+                    {t.reductionTips}
                   </h2>
                 </div>
 
@@ -380,10 +399,10 @@ export default function ESGDataPage() {
                           <IconComponent className="h-5 w-5 text-green-600" />
                         </div>
                         <div className="font-semibold text-sm text-[#1a3a52]">
-                          {tip.title}
+                          {t[tip.title as keyof typeof t]}
                         </div>
                         <p className="text-xs text-[#4a6b84]">
-                          {tip.description}
+                          {t[tip.description as keyof typeof t]}
                         </p>
                       </div>
                     );
@@ -404,7 +423,7 @@ export default function ESGDataPage() {
                     className="w-full flex items-center justify-between p-0 h-auto hover:bg-transparent mb-4"
                   >
                     <h2 className="text-2xl font-bold text-[#1a3a52]">
-                      Trip History
+                      {t.tripHistory}
                     </h2>
                     {isTripHistoryOpen ? (
                       <ChevronUp className="h-5 w-5 text-[#4a6b84]" />
@@ -437,9 +456,9 @@ export default function ESGDataPage() {
                           </div>
                           <div className="text-right">
                             <p className="text-2xl font-bold text-[#1a3a52]">
-                              {Math.round(trip.carbonFootprint)} kg
+                              {Math.round(trip.carbonFootprint)} {t.kg}
                             </p>
-                            <p className="text-xs text-[#4a6b84]">CO₂</p>
+                            <p className="text-xs text-[#4a6b84]">{t.co2}</p>
                           </div>
                         </div>
                       ))}

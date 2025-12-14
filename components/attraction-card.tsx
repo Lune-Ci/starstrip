@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Heart, MapPin, Clock, DollarSign, Leaf } from "lucide-react";
 import type { Attraction } from "@/lib/route-planner-store";
 import { useFavoritesStore } from "@/lib/favorites-store";
-import { cn } from "@/lib/utils";
+import { cn, getAttractionName } from "@/lib/utils";
 import { useAuthStore } from "@/lib/auth-store";
 import {
   Dialog,
@@ -138,7 +138,7 @@ export function AttractionCard({
         <div className="relative aspect-[4/3] overflow-hidden">
           <img
             src={resolveAttractionImage()}
-            alt={attraction.name}
+            alt={getAttractionName(attraction.id, attraction.name, language)}
             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
             onError={(e) => {
               const img = e.currentTarget as HTMLImageElement;
@@ -167,7 +167,7 @@ export function AttractionCard({
 
         <div className="p-4">
           <h3 className="text-xl font-bold text-[#1a3a52] mb-2 line-clamp-1">
-            {attraction.name}
+            {getAttractionName(attraction.id, attraction.name, language)}
           </h3>
 
           <div className="flex items-center gap-2 text-[#4a6b84] mb-3">

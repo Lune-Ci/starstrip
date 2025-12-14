@@ -16,7 +16,7 @@ interface StepPreferencesProps {
 export function StepPreferences({ onNext, onBack }: StepPreferencesProps) {
   const { profile } = useUserProfileStore()
   const { language } = useLanguageStore()
-  const t = translations[language]
+  const t = translations[language] as any
 
   const hasProfile = profile.hasCompletedProfile
 

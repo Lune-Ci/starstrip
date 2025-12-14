@@ -11,6 +11,7 @@ import { Card } from "@/components/ui/card";
 import { Heart, UtensilsCrossed } from "lucide-react";
 import { useLanguageStore } from "@/lib/language-store";
 import { translations } from "@/lib/translations";
+import { getMealName } from "@/lib/utils";
 
 export default function FavoritesPage() {
   const fav = useFavoritesStore();
@@ -139,7 +140,7 @@ export default function FavoritesPage() {
                     className="liquid-glass border-0 p-6"
                   >
                     <h3 className="text-xl font-bold text-[#1a3a52] mb-2">
-                      {restaurant.name}
+                      {getMealName(restaurant.id, restaurant.name, language)}
                     </h3>
                     <p className="text-[#4a6b84] mb-2">
                       {getCityLabel(restaurant.city)}
