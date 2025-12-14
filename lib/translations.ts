@@ -259,8 +259,7 @@ export const translations = {
     closeMenu: "Close menu",
     // Favorites
     myFavorites: "My Favorites",
-    yourSavedAttractionsAndRestaurants:
-      "Your saved attractions and cuisine",
+    yourSavedAttractionsAndRestaurants: "Your saved attractions and cuisine",
     restaurants: "Cuisine",
     noFavoriteAttractionsYet: "No favorite attractions yet",
     startExploringAndSaveYourFavoritePlaces:
@@ -488,6 +487,7 @@ export const translations = {
     userCenter: "Centro de Usuario",
     routePlanner: "Planificador de Rutas",
     attractions: "Atracciones",
+    cuisine: "Gastronomía",
     favorites: "Favoritos",
     esgData: "Datos ESG",
 
@@ -498,6 +498,13 @@ export const translations = {
     getStarted: "Comenzar",
     exploreAttractions: "Explorar Atracciones",
     popularDestinations: "Destinos Populares",
+
+    // Cuisine page
+    discoverCuisine: "Descubrir Gastronomía",
+    exploreChinaCuisine: "Explora la gastronomía más deliciosa de China",
+    searchCuisine: "Buscar gastronomía...",
+    foundCuisine: "Se encontraron {count} artículos de gastronomía",
+    noCuisineFound: "No se encontró gastronomía que coincida con tus filtros",
 
     // Features
     discoverAttractionsTitle: "Descubrir Atracciones",
@@ -686,6 +693,7 @@ export const translations = {
     userCenter: "Centre Utilisateur",
     routePlanner: "Planificateur de Route",
     attractions: "Attractions",
+    cuisine: "Cuisine",
     favorites: "Favoris",
     esgData: "Données ESG",
 
@@ -696,6 +704,13 @@ export const translations = {
     getStarted: "Commencer",
     exploreAttractions: "Explorer les Attractions",
     popularDestinations: "Destinations Populaires",
+
+    // Cuisine page
+    discoverCuisine: "Découvrir la Cuisine",
+    exploreChinaCuisine: "Explorez la cuisine chinoise la plus délicieuse",
+    searchCuisine: "Rechercher des plats...",
+    foundCuisine: "Trouvé {count} éléments de cuisine",
+    noCuisineFound: "Aucune cuisine trouvée correspondant à vos filtres",
 
     // Features
     discoverAttractionsTitle: "Découvrir les Attractions",
@@ -947,6 +962,7 @@ export const translations = {
     userCenter: "مركز المستخدم",
     routePlanner: "مخطط المسار",
     attractions: "المعالم السياحية",
+    cuisine: "المأكولات",
     favorites: "المفضلة",
     esgData: "بيانات ESG",
 
@@ -956,6 +972,13 @@ export const translations = {
     getStarted: "ابدأ",
     exploreAttractions: "استكشف المعالم",
     popularDestinations: "الوجهات الشعبية",
+
+    // Cuisine page
+    discoverCuisine: "اكتشف المأكولات",
+    exploreChinaCuisine: "استكشف أشهى المأكولات الصينية",
+    searchCuisine: "ابحث عن المأكولات...",
+    foundCuisine: "تم العثور على {count} من المأكولات",
+    noCuisineFound: "لا توجد مأكولات مطابقة لمرشحاتك",
 
     // Features
     discoverAttractionsTitle: "اكتشف المعالم",
@@ -1140,6 +1163,7 @@ export const translations = {
     userCenter: "Личный Кабинет",
     routePlanner: "Планировщик Маршрутов",
     attractions: "Достопримечательности",
+    cuisine: "Кухня",
     favorites: "Избранное",
     esgData: "Данные ESG",
 
@@ -1150,6 +1174,13 @@ export const translations = {
     getStarted: "Начать",
     exploreAttractions: "Исследовать Достопримечательности",
     popularDestinations: "Популярные Направления",
+
+    // Cuisine page
+    discoverCuisine: "Откройте Кухню",
+    exploreChinaCuisine: "Исследуйте самую вкусную китайскую кухню",
+    searchCuisine: "Поиск кухни...",
+    foundCuisine: "Найдено {count} блюд",
+    noCuisineFound: "Кухня не найдена по вашим фильтрам",
 
     // Features
     discoverAttractionsTitle: "Откройте Достопримечательности",
