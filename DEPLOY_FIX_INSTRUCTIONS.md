@@ -30,7 +30,35 @@ https://your-project-name.vercel.app
 _(注意：请在 Vercel 控制台的 "Domains" 页面查看分配给你的实际域名，不要直接使用 starstrip.vercel.app，除非你确定拥有该域名)_
 _(请确保这是你实际访问的线上域名，不要带 /api/auth 等后缀)_
 
-## 3. 重新部署
+## 3. 刷新本地 DNS 缓存 (如果电脑无法访问)
+
+如果你确定域名正确且手机能打开，但电脑打不开 (DNS_PROBE_FINISHED_NXDOMAIN)，请尝试刷新 DNS：
+
+**Mac 终端命令 (打开 Terminal 运行):**
+
+```bash
+sudo killall -HUP mDNSResponder
+```
+
+或者
+
+```bash
+dscacheutil -flushcache
+```
+
+**Windows 命令行 (以管理员身份运行 CMD):**
+
+```bash
+ipconfig /flushdns
+```
+
+**尝试修改 DNS 服务器:**
+如果刷新缓存无效，尝试将电脑的 DNS 服务器修改为公共 DNS：
+
+- **Google DNS**: `8.8.8.8` 和 `8.8.4.4`
+- **Cloudflare DNS**: `1.1.1.1`
+
+## 4. 重新部署
 
 添加完变量后，建议去 **Deployments** 页面，找到最新的部署，点击三个点 -> **Redeploy**，确保环境变量生效。
 
