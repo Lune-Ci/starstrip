@@ -173,6 +173,10 @@ export const translations = {
     cost: "Cost",
 
     // Itinerary
+    dayFormat: "Day {day}",
+    attractionsLabel: "Attractions",
+    mealsLabel: "Meals",
+    notAvailable: "N/A",
     yourItinerary: "Your Itinerary",
     tripSummary: "Trip Summary",
     days: "Days",
@@ -469,6 +473,10 @@ export const translations = {
     cost: "花费",
 
     // Itinerary
+    dayFormat: "第 {day} 天",
+    attractionsLabel: "景点",
+    mealsLabel: "餐饮",
+    notAvailable: "暂无",
     yourItinerary: "你的行程",
     tripSummary: "行程摘要",
     days: "天数",
@@ -721,6 +729,10 @@ export const translations = {
     cost: "Costo",
 
     // Itinerary
+    dayFormat: "Día {day}",
+    attractionsLabel: "Atracciones",
+    mealsLabel: "Comidas",
+    notAvailable: "N/A",
     yourItinerary: "Tu Itinerario",
     tripSummary: "Resumen del viaje",
     days: "Días",
@@ -1015,6 +1027,9 @@ export const translations = {
     noDataAvailable: "Aucune donnée disponible",
     reductionTips: "Conseils de Réduction",
     tripHistory: "Historique des Voyages",
+    trains: "Trains",
+    accommodation: "Hébergement",
+    activities: "Activités",
     kg: "kg",
     co2: "CO₂",
     tipHighSpeedRailTitle: "Train à Grande Vitesse",
@@ -1087,6 +1102,10 @@ export const translations = {
     cost: "Coût",
 
     // Itinerary
+    dayFormat: "Jour {day}",
+    attractionsLabel: "Attractions",
+    mealsLabel: "Repas",
+    notAvailable: "N/A",
     yourItinerary: "Votre Itinéraire",
     tripSummary: "Résumé du Voyage",
     days: "Jours",
@@ -1391,6 +1410,10 @@ export const translations = {
     generateFirstRoute: "أنشئ أول مسار لتراه هنا",
 
     // Itinerary
+    dayFormat: "اليوم {day}",
+    attractionsLabel: "المعالم",
+    mealsLabel: "الوجبات",
+    notAvailable: "غير متوفر",
     yourItinerary: "خط سيرك",
     tripSummary: "ملخص الرحلة",
     days: "أيام",
@@ -1752,6 +1775,10 @@ export const translations = {
     co2: "CO₂",
 
     // Itinerary
+    dayFormat: "День {day}",
+    attractionsLabel: "Достопримечательности",
+    mealsLabel: "Еда",
+    notAvailable: "Н/Д",
     yourItinerary: "Ваш маршрут",
     tripSummary: "Сводка поездки",
     days: "Дни",

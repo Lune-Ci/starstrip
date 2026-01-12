@@ -13,7 +13,7 @@ import {
   Calendar,
   TrendingUp,
 } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn, getAttractionName, getMealName } from "@/lib/utils";
 import { generateRoute, calculateRouteTotals } from "@/lib/route-generator";
 import { useLanguageStore } from "@/lib/language-store";
 import { translations } from "@/lib/translations";
@@ -111,8 +111,10 @@ export function StepScheme({
           .slice(0, Math.min(2, itinerary.length))
           .map((day) => ({
             day: day.date,
-            attractions: day.attractions.map((a) => a.name),
-            meals: day.meals.map((m) => m.name),
+            attractions: day.attractions.map((a) =>
+              getAttractionName(a.id, a.name, language)
+            ),
+            meals: day.meals.map((m) => getMealName(m.id, m.name, language)),
           }));
         previews[scheme.id] = {
           cost: totalCost,
@@ -127,7 +129,7 @@ export function StepScheme({
     });
 
     return previews;
-  }, [startLocation, dateRange]);
+  }, [startLocation, dateRange, language]);
 
   const displayScheme = hoveredScheme || selectedScheme;
 
@@ -272,13 +274,14 @@ export function StepScheme({
                   {preview.sample.map((s, idx) => (
                     <div key={idx} className="mb-2">
                       <div className="font-semibold text-[#1a3a52]">
-                        Day {idx + 1} • {s.day}
+                        {t.dayFormat.replace("{day}", idx + 1)} • {s.day}
                       </div>
                       <div className="text-[#4a6b84] truncate">
-                        Attractions: {s.attractions.join(", ") || "N/A"}
+                        {t.attractionsLabel}:{" "}
+                        {s.attractions.join(", ") || t.notAvailable}
                       </div>
                       <div className="text-[#4a6b84] truncate">
-                        Meals: {s.meals.join(", ") || "N/A"}
+                        {t.mealsLabel}: {s.meals.join(", ") || t.notAvailable}
                       </div>
                     </div>
                   ))}

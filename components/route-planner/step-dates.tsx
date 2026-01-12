@@ -6,6 +6,7 @@ import { Card } from "@/components/ui/card";
 import { Calendar } from "@/components/ui/calendar";
 import { CalendarIcon, Star } from "lucide-react";
 import { format } from "date-fns";
+import { enUS, zhCN, es, fr, ru, ar } from "date-fns/locale";
 import { useLanguageStore } from "@/lib/language-store";
 import { translations } from "@/lib/translations";
 import {
@@ -16,6 +17,15 @@ import {
   nationalityToCountryCode,
 } from "@/lib/holiday-api";
 import { useUserProfileStore } from "@/lib/user-profile-store";
+
+const localeMap: Record<string, any> = {
+  en: enUS,
+  zh: zhCN,
+  es: es,
+  fr: fr,
+  ru: ru,
+  ar: ar,
+};
 
 interface StepDatesProps {
   dateRange: { from: Date | string | null; to: Date | string | null };
@@ -33,6 +43,7 @@ export function StepDates({
   const { profile } = useUserProfileStore();
   const { language } = useLanguageStore();
   const t = translations[language] as any;
+  const dateLocale = localeMap[language] || enUS;
   const [holidays, setHolidays] = useState<PublicHoliday[]>([]);
   const [hoveredDate, setHoveredDate] = useState<Date | null>(null);
 
@@ -119,7 +130,8 @@ export function StepDates({
             <div className="bg-white/60 rounded-lg p-4 mb-4">
               <p className="text-[#4a6b84] text-sm mb-1">{t.selectedDates}</p>
               <p className="text-[#1a3a52] font-semibold text-lg">
-                {format(fromDate, "PPP")} - {format(toDate, "PPP")}
+                {format(fromDate, "PPP", { locale: dateLocale })} -{" "}
+                {format(toDate, "PPP", { locale: dateLocale })}
               </p>
               <p className="text-[#4a6b84] text-sm mt-1">
                 {t.duration}:{" "}
@@ -144,6 +156,7 @@ export function StepDates({
           <div className="flex justify-center">
             <Calendar
               mode="range"
+              locale={dateLocale}
               selected={
                 fromDate && toDate ? { from: fromDate, to: toDate } : undefined
               }

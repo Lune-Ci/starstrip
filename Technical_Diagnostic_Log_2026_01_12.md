@@ -90,3 +90,56 @@
 2.  **验证**:
     - 部署完成后，尝试在行程规划中点击“完善资料”，保存后看是否自动跳转回规划页。
     - 使用 Safari 访问网站确认兼容性。
+
+---
+
+## 5. 后续修复详情 (Additional Fixes Log) - [16:30]
+
+针对用户反馈的“多语言环境下个人偏好卡片仍显示英文”及其他本地化遗漏问题，进行了以下修复：
+
+### F. 路线规划器多语言修复 (Route Planner Localization Fixes)
+
+1.  **个人偏好卡片 (Preference Cards)**
+
+    - **位置**: `components/route-planner/step-preferences.tsx`
+    - **问题**: 切换语言后，国籍、旅行节奏 (Travel Pace)、预算 (Budget Level) 等字段仍显示英文枚举值 (如 "Moderate", "Luxury")。
+    - **修复**: 引入 `getCountryLabel`, `getInterestLabel` 工具函数，并使用 `translations` 对象动态映射枚举值到当前语言。增加回退逻辑防止 key 缺失导致的错误。
+
+2.  **地点选择 (Location Step)**
+
+    - **位置**: `components/route-planner/step-location.tsx`
+    - **问题**: 下拉菜单中的城市名称 (Beijing, Shanghai 等) 为硬编码英文。
+    - **修复**: 建立城市名称到翻译 Key (`cityBeijing`, `cityShanghai` 等) 的映射表，实现城市名称的动态翻译。
+
+3.  **日期选择组件 (Date Selection)**
+    - **位置**: `components/route-planner/step-dates.tsx`
+    - **问题**: 日历组件的月份和星期显示为默认英文，未随系统语言切换。
+    - **修复**: 引入 `date-fns/locale` 多语言包，建立语言代码到 locale 的映射 (`localeMap`)，并将 `locale` 属性传递给 `<Calendar />` 组件。
+
+### G. 新增操作文件清单 (Additional Operations Manifest)
+
+- `components/route-planner/step-preferences.tsx` (Fixed enum translation)
+- `components/route-planner/step-location.tsx` (Fixed city translation)
+- `components/route-planner/step-dates.tsx` (Added calendar localization)
+
+### H. 验证建议 (Verification)
+
+1.  **偏好卡片**: 切换语言到中文/西班牙语等，进入“路线规划 -> 偏好设置”，确认所有标签（如“适中”、“经济”）均显示为目标语言。
+2.  **地点选择**: 确认下拉菜单中的城市名称已翻译。
+3.  **日历**: 确认日历的月份标题和星期头已本地化。
+
+---
+
+## 6. 部署准备确认 (Deployment Readiness Check) - [17:00]
+
+在用户发出“部署”指令后，进行了最终的系统检查：
+
+1.  **本地构建**: `npm run build` ✅ 通过。
+2.  **类型检查**: `npx tsc --noEmit` ✅ 通过 (修复了潜在的类型隐患)。
+3.  **Lint 检查**: `npm run lint` ✅ 通过。
+4.  **文件清理**:
+    - `.gitignore` 已验证，排除了 `图片库/` 和 `Suzhou/` 等源文件。
+    - 检查了大文件情况，`public` 文件夹约 92MB，符合 Vercel 推荐标准 (<100MB)。
+5.  **版本控制**: 所有修复已提交到本地 Git 仓库，准备推送到 GitHub。
+
+**状态**: **READY TO PUSH** (已准备好推送)

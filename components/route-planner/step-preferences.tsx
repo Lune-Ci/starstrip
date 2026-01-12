@@ -7,6 +7,7 @@ import { Sparkles, AlertCircle } from "lucide-react";
 import Link from "next/link";
 import { useLanguageStore } from "@/lib/language-store";
 import { translations } from "@/lib/translations";
+import { getCountryLabel, getInterestLabel } from "@/lib/utils";
 
 interface StepPreferencesProps {
   onNext: () => void;
@@ -71,26 +72,30 @@ export function StepPreferences({ onNext, onBack }: StepPreferencesProps) {
                 <div className="flex justify-between">
                   <span className="text-[#4a6b84]">{t.nationality}:</span>
                   <span className="font-medium text-[#1a3a52]">
-                    {profile.nationality || t.notSet}
+                    {profile.nationality
+                      ? getCountryLabel(profile.nationality, language)
+                      : t.notSet}
                   </span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-[#4a6b84]">{t.travelPace}:</span>
                   <span className="font-medium text-[#1a3a52] capitalize">
-                    {profile.travelPace}
+                    {t[profile.travelPace] || profile.travelPace}
                   </span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-[#4a6b84]">{t.budgetLevel}:</span>
                   <span className="font-medium text-[#1a3a52] capitalize">
-                    {profile.budgetLevel}
+                    {t[profile.budgetLevel] || profile.budgetLevel}
                   </span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-[#4a6b84]">{t.interests}:</span>
-                  <span className="font-medium text-[#1a3a52]">
+                  <span className="font-medium text-[#1a3a52] text-right">
                     {profile.interests.length > 0
-                      ? profile.interests.join(", ")
+                      ? profile.interests
+                          .map((i) => getInterestLabel(i, language))
+                          .join(", ")
                       : t.noneSelected}
                   </span>
                 </div>
