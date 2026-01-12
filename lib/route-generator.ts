@@ -1,10 +1,10 @@
 import type { Attraction, RouteScheme, ItineraryDay, Meal } from "./route-planner-store"
 import { attractionsData, mealsData } from "./attractions-data"
 import { eachDayOfInterval, format } from "date-fns"
+import { safeDate } from "./utils"
 
 function ensureDate(date: Date | string): Date {
-  if (date instanceof Date) return date
-  return new Date(date)
+  return safeDate(date)
 }
 
 export function generateRoute(

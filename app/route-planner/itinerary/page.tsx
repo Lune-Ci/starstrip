@@ -21,7 +21,7 @@ import { useRouter } from "next/navigation";
 import { generateRoute, calculateRouteTotals } from "@/lib/route-generator";
 import type { ItineraryDay } from "@/lib/route-planner-store";
 import { useAuthStore } from "@/lib/auth-store";
-import { getAttractionName, getMealName } from "@/lib/utils";
+import { getAttractionName, getMealName, safeDate } from "@/lib/utils";
 import {
   Dialog,
   DialogContent,
@@ -33,8 +33,7 @@ import { translations } from "@/lib/translations";
 
 function ensureDate(date: Date | string | null): Date | null {
   if (!date) return null;
-  if (date instanceof Date) return date;
-  return new Date(date);
+  return safeDate(date);
 }
 
 interface SavedRoute {
@@ -443,7 +442,7 @@ export default function ItineraryPage() {
                 </div>
                 <div>
                   <h3 className="text-lg md:text-xl font-bold text-[#1a3a52]">
-                    {format(new Date(day.date), "EEEE, MMMM d")}
+                    {format(safeDate(day.date), "EEEE, MMMM d")}
                   </h3>
                   <p className="text-xs md:text-sm text-[#4a6b84]">
                     {day.attractions.length > 0 && (

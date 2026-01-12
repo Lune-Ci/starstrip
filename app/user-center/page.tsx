@@ -1,17 +1,49 @@
 "use client";
 
+import { useAuthStore } from "@/lib/auth-store";
 import { MainLayout } from "@/components/main-layout";
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  User,
+  Settings,
+  LogOut,
+  MapPin,
+  Calendar,
+  Heart,
+  History,
+  Edit2,
+  Camera,
+  Loader2,
+  Save,
+  Trash2,
+  Check,
+  User as UserIcon,
+  Plane,
+  Wallet,
+} from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState, useRef } from "react";
+import { toast } from "sonner";
 import {
   useUserProfileStore,
   type TravelPace,
   type BudgetLevel,
 } from "@/lib/user-profile-store";
-import { useState, useEffect } from "react";
-import { Check, UserIcon, Plane, Wallet, Heart } from "lucide-react";
+import { useRoutePlannerStore } from "@/lib/route-planner-store";
+import { useFavoritesStore } from "@/lib/favorites-store";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+  DialogDescription,
+} from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
   Select,
   SelectContent,
@@ -22,7 +54,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { useLanguageStore } from "@/lib/language-store";
 import { translations } from "@/lib/translations";
-import { getCountryLabel, getInterestLabel } from "@/lib/utils";
+import { safeDate, getCountryLabel, getInterestLabel } from "@/lib/utils";
 
 const countries = [
   { code: "US", name: "United States" },

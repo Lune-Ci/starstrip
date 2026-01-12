@@ -10,6 +10,7 @@ import {
   getCarbonReductionTips,
   getEmissionComparison,
 } from "@/lib/carbon-calculator";
+import { safeDate } from "@/lib/utils";
 import {
   Leaf,
   Plane,
@@ -101,7 +102,7 @@ export default function ESGDataPage() {
   const monthlyData = Array.from({ length: 12 }, (_, i) => {
     const month = i + 1;
     const monthTrips = trips.filter((trip) => {
-      const date = new Date(trip.startDate);
+      const date = safeDate(trip.startDate);
       return date.getFullYear() === currentYear && date.getMonth() === i;
     });
     const carbon = monthTrips.reduce(
@@ -437,8 +438,8 @@ export default function ESGDataPage() {
                     {trips
                       .sort(
                         (a, b) =>
-                          new Date(b.startDate).getTime() -
-                          new Date(a.startDate).getTime()
+                          safeDate(b.startDate).getTime() -
+                          safeDate(a.startDate).getTime()
                       )
                       .map((trip) => (
                         <div
@@ -450,8 +451,8 @@ export default function ESGDataPage() {
                               {trip.name}
                             </h3>
                             <p className="text-sm text-[#4a6b84]">
-                              {new Date(trip.startDate).toLocaleDateString()} -{" "}
-                              {new Date(trip.endDate).toLocaleDateString()}
+                              {safeDate(trip.startDate).toLocaleDateString()} -{" "}
+                              {safeDate(trip.endDate).toLocaleDateString()}
                             </p>
                           </div>
                           <div className="text-right">
