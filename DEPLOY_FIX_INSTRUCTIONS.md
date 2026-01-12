@@ -40,11 +40,15 @@ _(请确保这是你实际访问的线上域名，不要带 /api/auth 等后缀)
 sudo killall -HUP mDNSResponder
 ```
 
+_(注意：输入此命令后通常没有任何提示，这是正常的，代表执行成功)_
+
 或者
 
 ```bash
 dscacheutil -flushcache
 ```
+
+_(同样，此命令执行成功后也不会有任何提示，直接显示下一行命令行)_
 
 **Windows 命令行 (以管理员身份运行 CMD):**
 
