@@ -10,28 +10,65 @@ type StoredUser = {
   createdAt: string;
 };
 
+// In-memory fallback for read-only environments (like Vercel)
+let memoryUsers: StoredUser[] = [];
+
 const dataDir = path.join(process.cwd(), "data");
 const usersFile = path.join(dataDir, "users.json");
 
+function isReadOnlyError(err: any) {
+  return err && (err.code === "EROFS" || err.code === "EACCES" || err.code === "ENOENT");
+}
+
 function ensureDataFile() {
-  if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
-  if (!fs.existsSync(usersFile))
-    fs.writeFileSync(usersFile, JSON.stringify([], null, 2));
+  try {
+    if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
+    if (!fs.existsSync(usersFile))
+      fs.writeFileSync(usersFile, JSON.stringify([], null, 2));
+  } catch (err) {
+    // If we can't write to disk, we just use memory
+    console.warn("[WARN] File system is read-only. Using in-memory storage.");
+  }
 }
 
 function readUsers(): StoredUser[] {
-  ensureDataFile();
-  const raw = fs.readFileSync(usersFile, "utf8");
   try {
-    return JSON.parse(raw);
-  } catch {
-    return [];
+    if (!fs.existsSync(usersFile)) return memoryUsers;
+    const raw = fs.readFileSync(usersFile, "utf8");
+    try {
+      const diskUsers = JSON.parse(raw);
+      // Merge disk users with memory users (memory users take precedence for recent writes)
+      // This is a simple strategy for MVP; in production, use a DB.
+      const userMap = new Map<string, StoredUser>();
+      diskUsers.forEach((u: StoredUser) => userMap.set(u.id, u));
+      memoryUsers.forEach((u: StoredUser) => userMap.set(u.id, u));
+      return Array.from(userMap.values());
+    } catch {
+      return memoryUsers;
+    }
+  } catch (err) {
+    if (isReadOnlyError(err)) {
+       return memoryUsers;
+    }
+    // Fallback to memoryUsers if file read fails for other reasons
+    return memoryUsers;
   }
 }
 
 function writeUsers(users: StoredUser[]) {
-  ensureDataFile();
-  fs.writeFileSync(usersFile, JSON.stringify(users, null, 2));
+  // Always update memory first
+  memoryUsers = [...users];
+  
+  try {
+    ensureDataFile();
+    fs.writeFileSync(usersFile, JSON.stringify(users, null, 2));
+  } catch (err) {
+    if (isReadOnlyError(err)) {
+      console.warn("[WARN] Could not write users to disk (Read-Only FS). User registered in memory only.");
+      return;
+    }
+    console.error("[ERROR] Failed to write users file:", err);
+  }
 }
 
 export function findUserByEmail(email: string): StoredUser | undefined {
