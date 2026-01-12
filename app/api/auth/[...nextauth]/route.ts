@@ -86,24 +86,16 @@ async function buildAuthOptions(): Promise<NextAuthOptions> {
       },
     },
     secret: process.env.NEXTAUTH_SECRET,
+    debug: process.env.NODE_ENV === "development",
   };
 }
 
-export async function GET(
-  req: Request,
-  context: { params: { nextauth: string[] } }
-) {
-  const handler = NextAuth(await buildAuthOptions());
-  // Pass along route params so NextAuth can resolve the dynamic segments
-  // @ts-ignore - NextAuth handler is compatible with Next's Route Handler signature
-  return handler(req, context);
-}
-
-export async function POST(
-  req: Request,
-  context: { params: { nextauth: string[] } }
-) {
-  const handler = NextAuth(await buildAuthOptions());
+const handler = async (req: Request, context: any) => {
+  const options = await buildAuthOptions();
   // @ts-ignore
-  return handler(req, context);
-}
+  const nextAuthHandler = NextAuth(options);
+  // @ts-ignore
+  return nextAuthHandler(req, context);
+};
+
+export { handler as GET, handler as POST };
