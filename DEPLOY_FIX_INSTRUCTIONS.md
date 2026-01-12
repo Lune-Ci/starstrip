@@ -3,30 +3,42 @@
 检测到线上环境 (Vercel) 出现 500 错误，这是因为缺少关键的环境变量配置。请按照以下步骤修复：
 
 ## 1. 登录 Vercel 后台
+
 进入你的 Vercel 项目控制台，点击 **Settings (设置)** -> **Environment Variables (环境变量)**。
 
 ## 2. 添加以下变量
 
 ### 变量名: `NEXTAUTH_SECRET`
+
 **值 (Value):**
+
 ```
 boq9Cw5e5Iv6J2NEQRTEZSl9O4CSrXKlgLz7JkP4cWc=
 ```
-*(这是为你生成的一个随机安全密钥)*
+
+_(这是为你生成的一个随机安全密钥)_
 
 ### 变量名: `NEXTAUTH_URL`
+
 **值 (Value):**
+请填写你实际的 Vercel 项目域名，例如：
+
 ```
-https://starstrip.vercel.app
+https://your-project-name.vercel.app
 ```
-*(请确保这是你实际访问的线上域名，不要带 /api/auth 等后缀)*
+
+_(注意：请在 Vercel 控制台的 "Domains" 页面查看分配给你的实际域名，不要直接使用 starstrip.vercel.app，除非你确定拥有该域名)_
+_(请确保这是你实际访问的线上域名，不要带 /api/auth 等后缀)_
 
 ## 3. 重新部署
+
 添加完变量后，建议去 **Deployments** 页面，找到最新的部署，点击三个点 -> **Redeploy**，确保环境变量生效。
 
 ## 4. 验证
+
 重新访问网站，应该可以正常打开了。
 
 ---
+
 **技术说明：**
 我们已更新了代码 (`app/api/auth/[...nextauth]/route.ts`)，修复了 NextAuth 的处理程序配置，增加了 POST 请求的支持，并添加了更完善的错误处理逻辑。
