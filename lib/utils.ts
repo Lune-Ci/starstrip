@@ -13,15 +13,29 @@ export function cn(...inputs: ClassValue[]) {
  */
 export function safeDate(date: string | Date | null | undefined): Date {
   if (!date) return new Date();
-  if (date instanceof Date) return date;
 
-  // If it's a string like "2023-10-01", replace hyphens with slashes
-  // to ensure local time parsing across all browsers (especially Safari)
-  if (typeof date === "string" && /^\d{4}-\d{2}-\d{2}$/.test(date)) {
-    return new Date(date.replace(/-/g, "/"));
+  let d: Date;
+  if (date instanceof Date) {
+    d = date;
+  } else if (typeof date === "string" && /^\d{4}-\d{2}-\d{2}$/.test(date)) {
+    // If it's a string like "2023-10-01", replace hyphens with slashes
+    // to ensure local time parsing across all browsers (especially Safari)
+    d = new Date(date.replace(/-/g, "/"));
+  } else {
+    d = new Date(date);
   }
 
-  return new Date(date);
+  // Final validation check - if date is invalid, fallback to current time
+  // This prevents NaN errors in calculations that can crash the app (especially in Safari)
+  if (isNaN(d.getTime())) {
+    console.warn(
+      "safeDate encountered invalid date, falling back to now:",
+      date
+    );
+    return new Date();
+  }
+
+  return d;
 }
 
 const ATTRACTION_NAME_MAP: Record<Language, Record<string, string>> = {

@@ -72,9 +72,19 @@ ipconfig /flushdns
   1.  **切换网络**: 使用手机热点或家庭宽带。
   2.  **使用 VPN**: 如果必须在校园网环境访问，可能需要开启 VPN。
 
-## 5. 重新部署
+### 5. 后台管理系统 (Admin Panel)
 
-添加完变量后，建议去 **Deployments** 页面，找到最新的部署，点击三个点 -> **Redeploy**，确保环境变量生效。
+如果你需要访问后台查看用户数据：
+
+- **访问地址**: 浏览器直接访问 `/admin/users` (例如 `https://your-app.vercel.app/admin/users`)
+- **启用条件**: 必须在环境变量中设置 `ENABLE_ADMIN_API=true`。
+  - **本地**: 在 `.env.local` 中添加。
+  - **Vercel**: 在 Settings -> Environment Variables 中添加。
+- **注意**: 目前项目中**没有**配置 `Command+Option+I` 快捷键进入后台（该快捷键通常是浏览器开发者工具）。
+
+## 总结
+
+完成以上配置后，请务必在 Vercel 控制台点击 **Redeploy** 以使环境变量生效。
 
 ## 4. 验证
 
