@@ -80,7 +80,16 @@ Initial analysis revealed the following critical issues:
 *   **Build Status**: The project compiles without TypeScript errors related to the translation file.
 *   **Repository Status**: `git status` confirms a clean working tree with no uncommitted changes.
 
-## 5. File Manifest (Modified Files)
+### 5. Deployment Troubleshooting (Addendum)
+
+**Issue**: NextAuth 500 Error on Vercel & Local DNS issues.
+**Resolution**:
+1.  **NextAuth Fix**: Unified GET/POST handlers in `app/api/auth/[...nextauth]/route.ts` and added debug mode.
+2.  **Environment Variables**: Created `DEPLOY_FIX_INSTRUCTIONS.md` to guide the user in setting `NEXTAUTH_SECRET` and `NEXTAUTH_URL` on Vercel.
+3.  **Safari Compatibility**: Fixed date parsing issues causing hydration errors on Safari/iOS by introducing `safeDate` utility in `lib/utils.ts` and updating dependent components (`app/esg-data`, `app/route-planner`, `app/user-center`).
+4.  **DNS Issues**: Diagnosed `NXDOMAIN` errors on local machine vs mobile. Updated instructions to include DNS flushing (`dscacheutil`, `killall mDNSResponder`).
+
+## 6. File Manifest (Modified Files)
 
 The following files were modified and committed as part of this work:
 
