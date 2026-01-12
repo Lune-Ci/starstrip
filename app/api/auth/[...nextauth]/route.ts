@@ -98,4 +98,5 @@ const handler = async (req: Request, context: any) => {
   return nextAuthHandler(req, context);
 };
 
+// Export handler for both GET and POST requests
 export { handler as GET, handler as POST };
