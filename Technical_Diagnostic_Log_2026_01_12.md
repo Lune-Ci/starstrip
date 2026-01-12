@@ -9,7 +9,7 @@
 
 - **代码构建 (Build)**: ✅ **通过** (Lint check passed: 0 Errors)
 - **浏览器兼容性**: ✅ **已修复** (Safari `Date` 解析问题已处理)
-- **部署状态**: ⚠️ **需重新部署** (环境变量更新后需手动 Redeploy)
+- **部署状态**: ⚠️ **需重新部署** (代码已推送到 main 分支，请在 Vercel 触发 Redeploy)
 - **网络访问**: ⚠️ **受限** (部分校园网需切换 DNS 或使用热点)
 
 ---
@@ -49,7 +49,15 @@
 - **修复**: 补充了俄语 (RU)、西班牙语 (ES) 等 6 种语言缺失的 12 个碳减排建议 Key。
 - **优化**: 将 `app/esg-data` 中的硬编码文本替换为动态翻译引用 `t.{key}`。
 
-### D. 部署与后台 (Deployment & Admin)
+### D. 用户体验优化 (User Experience / Redirection Bug)
+
+- **问题**: 用户在行程规划中途跳转至用户中心完善资料后，保存时无法自动返回规划页面，导致数据流失。
+- **修复**:
+  - **来源追踪**: 在“完善资料”按钮链接中增加 `?from=route-planner` 参数 (`components/route-planner/step-preferences.tsx`)。
+  - **自动跳转**: 修改 `app/user-center/page.tsx`，在保存资料成功后识别该参数，自动跳转回 `/route-planner`。
+  - **状态保持**: 依赖 `zustand/persist` 确保行程数据在跳转期间保留。
+
+### E. 部署与后台 (Deployment & Admin)
 
 - **Vercel 500 错误**: 修复了 `NEXTAUTH_SECRET` 缺失问题。
 - **后台访问**: 确认后台入口为 `/admin/users`，需开启 `ENABLE_ADMIN_API=true`。
@@ -61,6 +69,8 @@
 
 以下文件已被修改或创建：
 
+- `app/user-center/page.tsx` (Added redirection logic)
+- `components/route-planner/step-preferences.tsx` (Added tracking param)
 - `app/not-found.tsx` (Fixed quotes)
 - `app/route-planner/itinerary/page.tsx` (Fixed hooks)
 - `lib/utils.ts` (Added safeDate)
@@ -76,7 +86,7 @@
 ## 4. 下一步行动建议 (Next Steps)
 
 1.  **重新部署 (Critical)**:
-    - 请务必在 Vercel 控制台点击 **Redeploy**，否则上述修复（特别是环境变量和 Safari 补丁）不会生效。
+    - 请务必在 Vercel 控制台点击 **Redeploy**，确保最新代码（包含重定向修复和 Safari 补丁）生效。
 2.  **验证**:
-    - 部署完成后，使用 Safari 访问网站。
-    - 访问 `/admin/users` 验证后台（确保已设置环境变量）。
+    - 部署完成后，尝试在行程规划中点击“完善资料”，保存后看是否自动跳转回规划页。
+    - 使用 Safari 访问网站确认兼容性。
