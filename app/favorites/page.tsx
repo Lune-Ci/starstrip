@@ -90,7 +90,7 @@ export default function FavoritesPage() {
         </div>
 
         <Tabs defaultValue="attractions" className="w-full">
-          <TabsList className="liquid-glass mb-6">
+          <TabsList className="liquid-glass mb-6 w-full justify-start overflow-x-auto h-auto p-2">
             <TabsTrigger
               value="attractions"
               className="flex items-center gap-2"

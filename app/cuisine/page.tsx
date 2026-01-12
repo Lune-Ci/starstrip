@@ -353,7 +353,7 @@ export default function CuisinePage() {
                 </div>
 
                 <div className="p-4">
-                  <h3 className="text-xl font-bold text-[#1a3a52] mb-2 line-clamp-1">
+                  <h3 className="text-xl font-bold text-[#1a3a52] mb-2 line-clamp-2 min-h-[3.5rem]">
                     {getMealName(meal.id, meal.name, language)}
                   </h3>
 

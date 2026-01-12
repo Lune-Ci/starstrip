@@ -142,7 +142,7 @@ export default function AttractionsPage() {
     <MainLayout>
       <div className="container mx-auto px-4 py-8">
         <div className="mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold text-[#1a3a52] mb-3">
+          <h1 className="text-4xl md:text-5xl font-bold text-[#1a3a52] mb-3 break-words hyphens-auto">
             {t.discoverAttractions}
           </h1>
           <p className="text-lg text-[#4a6b84]">{t.exploreChinaDestinations}</p>

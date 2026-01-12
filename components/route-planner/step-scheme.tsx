@@ -136,10 +136,10 @@ export function StepScheme({
   return (
     <div className="max-w-6xl mx-auto px-2 md:px-4">
       <div className="text-center mb-6 md:mb-8">
-        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#1a3a52] mb-2 md:mb-3">
+        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#1a3a52] mb-2 md:mb-3 break-words hyphens-auto">
           {t.chooseRouteScheme}
         </h2>
-        <p className="text-base md:text-lg text-[#4a6b84]">
+        <p className="text-base md:text-lg text-[#4a6b84] break-words">
           {t.selectOptimizationStrategy}
         </p>
       </div>

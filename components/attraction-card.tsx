@@ -166,7 +166,7 @@ export function AttractionCard({
         </div>
 
         <div className="p-4">
-          <h3 className="text-xl font-bold text-[#1a3a52] mb-2 line-clamp-1">
+          <h3 className="text-xl font-bold text-[#1a3a52] mb-2 line-clamp-2 min-h-[3.5rem]">
             {getAttractionName(attraction.id, attraction.name, language)}
           </h3>
 
