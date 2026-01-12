@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { Button } from "@/components/ui/button"
-import { MainLayout } from "@/components/main-layout"
-import { FileQuestion } from "lucide-react"
+import { Button } from "@/components/ui/button";
+import { MainLayout } from "@/components/main-layout";
+import { FileQuestion } from "lucide-react";
 
 export default function NotFound() {
   return (
@@ -11,9 +11,12 @@ export default function NotFound() {
         <div className="mb-6 rounded-full bg-[#f3fbff] p-6 shadow-sm inline-flex">
           <FileQuestion className="h-12 w-12 text-[#5ba3d0]" />
         </div>
-        <h2 className="mb-4 text-3xl font-bold text-[#1a3a52]">Page Not Found</h2>
+        <h2 className="mb-4 text-3xl font-bold text-[#1a3a52]">
+          Page Not Found
+        </h2>
         <p className="mb-8 max-w-md text-[#4a6b84]">
-          Sorry, we couldn't find the page you're looking for. It might have been moved or doesn't exist.
+          Sorry, we couldn&apos;t find the page you&apos;re looking for. It
+          might have been moved or doesn&apos;t exist.
         </p>
         <div className="flex gap-4">
           <Button
@@ -25,5 +28,5 @@ export default function NotFound() {
         </div>
       </div>
     </MainLayout>
-  )
+  );
 }

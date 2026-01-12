@@ -222,6 +222,8 @@ export default function ItineraryPage() {
     state.dateRange.to,
     state.selectedScheme,
     state.startLocation,
+    isGenerating,
+    updateState
   ]);
 
   const fromDate = ensureDate(state.dateRange.from);
