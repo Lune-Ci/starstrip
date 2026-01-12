@@ -208,10 +208,10 @@ export function StepScheme({
                     <Icon className="h-5 w-5 md:h-6 md:w-6" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-lg md:text-xl font-bold text-[#1a3a52] mb-1">
+                    <h3 className="text-lg md:text-xl font-bold text-[#1a3a52] mb-1 break-words hyphens-auto">
                       {displayTitle}
                     </h3>
-                    <p className="text-[#4a6b84] text-xs md:text-sm leading-relaxed">
+                    <p className="text-[#4a6b84] text-xs md:text-sm leading-relaxed break-words">
                       {displayDesc}
                     </p>
                   </div>
@@ -273,14 +273,14 @@ export function StepScheme({
                 <div className="mt-3 bg-white/40 rounded-lg p-3 text-xs">
                   {preview.sample.map((s, idx) => (
                     <div key={idx} className="mb-2">
-                      <div className="font-semibold text-[#1a3a52]">
+                      <div className="font-semibold text-[#1a3a52] break-words">
                         {t.dayFormat.replace("{day}", idx + 1)} • {s.day}
                       </div>
-                      <div className="text-[#4a6b84] truncate">
+                      <div className="text-[#4a6b84] break-words whitespace-normal">
                         {t.attractionsLabel}:{" "}
                         {s.attractions.join(", ") || t.notAvailable}
                       </div>
-                      <div className="text-[#4a6b84] truncate">
+                      <div className="text-[#4a6b84] break-words whitespace-normal">
                         {t.mealsLabel}: {s.meals.join(", ") || t.notAvailable}
                       </div>
                     </div>

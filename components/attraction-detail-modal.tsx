@@ -175,33 +175,37 @@ export function AttractionDetailModal({
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="bg-white/60 rounded-lg p-4">
               <div className="flex items-center gap-2 mb-1">
-                <Clock className="h-5 w-5 text-[#5ba3d0]" />
-                <span className="text-sm text-[#4a6b84]">
+                <Clock className="h-5 w-5 text-[#5ba3d0] shrink-0" />
+                <span className="text-sm text-[#4a6b84] break-words">
                   {t.durationLabel}
                 </span>
               </div>
-              <p className="text-xl font-bold text-[#1a3a52]">
+              <p className="text-xl font-bold text-[#1a3a52] break-words">
                 {attraction.duration} {t.hours}
               </p>
             </div>
             <div className="bg-white/60 rounded-lg p-4">
               <div className="flex items-center gap-2 mb-1">
-                <DollarSign className="h-5 w-5 text-[#5ba3d0]" />
-                <span className="text-sm text-[#4a6b84]">{t.costLabel}</span>
+                <DollarSign className="h-5 w-5 text-[#5ba3d0] shrink-0" />
+                <span className="text-sm text-[#4a6b84] break-words">
+                  {t.costLabel}
+                </span>
               </div>
-              <p className="text-xl font-bold text-[#1a3a52]">
+              <p className="text-xl font-bold text-[#1a3a52] break-words">
                 ¥{attraction.cost}
               </p>
             </div>
             <div className="bg-white/60 rounded-lg p-4">
               <div className="flex items-center gap-2 mb-1">
-                <Leaf className="h-5 w-5 text-[#5ba3d0]" />
-                <span className="text-sm text-[#4a6b84]">{t.carbonLabel}</span>
+                <Leaf className="h-5 w-5 text-[#5ba3d0] shrink-0" />
+                <span className="text-sm text-[#4a6b84] break-words">
+                  {t.carbonLabel}
+                </span>
               </div>
-              <p className="text-xl font-bold text-[#1a3a52]">
+              <p className="text-xl font-bold text-[#1a3a52] break-words">
                 {attraction.carbonFootprint}
                 {t.kg} {t.co2}
               </p>

@@ -96,14 +96,24 @@ export default function FavoritesPage() {
               className="flex items-center gap-2"
             >
               <Heart className="h-4 w-4" />
-              {t.attractions} ({attractions.length})
+              <span>
+                {t.attractions}{" "}
+                <span className="text-xs opacity-70">
+                  ({attractions.length})
+                </span>
+              </span>
             </TabsTrigger>
             <TabsTrigger
               value="restaurants"
               className="flex items-center gap-2"
             >
               <UtensilsCrossed className="h-4 w-4" />
-              {t.restaurants} ({restaurants.length})
+              <span>
+                {t.restaurants}{" "}
+                <span className="text-xs opacity-70">
+                  ({restaurants.length})
+                </span>
+              </span>
             </TabsTrigger>
           </TabsList>
 
