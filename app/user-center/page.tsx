@@ -24,8 +24,8 @@ import {
   Plane,
   Wallet,
 } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useEffect, useState, useRef } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState, useRef, Suspense } from "react";
 import { toast } from "sonner";
 import {
   useUserProfileStore,
@@ -95,17 +95,42 @@ interface SavedRoute {
 }
 
 export default function UserCenterPage() {
+  return (
+    <Suspense
+      fallback={
+        <MainLayout>
+          <div className="container mx-auto px-4 py-8">Loading...</div>
+        </MainLayout>
+      }
+    >
+      <UserCenterContent />
+    </Suspense>
+  );
+}
+
+function UserCenterContent() {
   const { profile, updateProfile } = useUserProfileStore();
   const [saved, setSaved] = useState(false);
   const [savedRoutes, setSavedRoutes] = useState<SavedRoute[]>([]);
   const [isClient, setIsClient] = useState(false);
   const { language } = useLanguageStore();
   const t = translations[language] as any;
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
   const handleSave = () => {
     updateProfile({ hasCompletedProfile: true });
     setSaved(true);
-    setTimeout(() => setSaved(false), 3000);
+
+    const from = searchParams.get("from");
+    if (from === "route-planner") {
+      setTimeout(() => {
+        setSaved(false);
+        router.push("/route-planner");
+      }, 1000);
+    } else {
+      setTimeout(() => setSaved(false), 3000);
+    }
   };
 
   useEffect(() => {
