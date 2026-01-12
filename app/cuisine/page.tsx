@@ -347,7 +347,7 @@ export default function CuisinePage() {
                       className={cn("h-5 w-5", isFavorited && "fill-current")}
                     />
                   </Button>
-                  <Badge className="absolute bottom-2 left-2 bg-[#5ba3d0] text-white">
+                  <Badge className="absolute bottom-2 left-2 bg-[#5ba3d0] text-white whitespace-normal text-center h-auto max-w-[calc(100%-1rem)]">
                     {getRegionLabel(getRegionForCity(meal.city), language)}
                   </Badge>
                 </div>
@@ -362,11 +362,11 @@ export default function CuisinePage() {
                     <span className="text-sm">{getCityLabel(meal.city)}</span>
                   </div>
 
-                  <div className="flex items-center justify-between mb-2">
-                    <Badge variant="outline" className="text-xs">
+                  <div className="flex flex-wrap gap-2 mb-2">
+                    <Badge variant="outline" className="text-xs whitespace-normal text-center h-auto py-1">
                       {getCuisineLabel(meal.cuisine)}
                     </Badge>
-                    <Badge variant="secondary" className="text-xs">
+                    <Badge variant="secondary" className="text-xs whitespace-normal text-center h-auto py-1">
                       {getTypeLabel(meal.type)}
                     </Badge>
                   </div>

@@ -160,7 +160,7 @@ export function AttractionCard({
           >
             <Heart className={cn("h-5 w-5", isFavorited && "fill-current")} />
           </Button>
-          <Badge className="absolute bottom-2 left-2 bg-[#5ba3d0] text-white">
+          <Badge className="absolute bottom-2 left-2 bg-[#5ba3d0] text-white whitespace-normal text-center h-auto max-w-[calc(100%-1rem)]">
             {getTypeLabel(attraction.type)}
           </Badge>
         </div>
