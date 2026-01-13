@@ -52,7 +52,7 @@ function LoginInner() {
     linkedin: Boolean(providers?.linkedin),
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
     if (!isValidEmail(email)) {
@@ -67,8 +67,19 @@ function LoginInner() {
       setError(t.pleasePassCaptcha);
       return;
     }
-    loginWithEmail(email, remember);
-    router.push(redirect);
+
+    const res = await signIn("credentials", {
+      email,
+      password,
+      redirect: false,
+    });
+
+    if (res?.error) {
+      setError(t.invalidEmailOrPassword || "Invalid email or password");
+    } else {
+      // Manually redirect to handle client-side state update via AuthBridge
+      router.push(redirect);
+    }
   };
 
   const handleGoogle = async () => {
@@ -89,8 +100,7 @@ function LoginInner() {
           <h1 className="text-3xl font-bold text-[#1a3a52] mb-6">{t.signIn}</h1>
           {params.get("upgrade") === "1" && (
             <div className="mb-4 text-sm text-[#4a6b84]">
-              After signing in, your current favorites and routes will be
-              merged.
+              {t.mergeFavoritesNotice}
             </div>
           )}
           <Card className="liquid-glass border-0 p-6">
@@ -176,13 +186,13 @@ function LoginInner() {
                 <div className="h-px bg-[#dbe5ec] w-full" />
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 gap-3">
                 <Button
                   type="button"
                   variant="outline"
                   onClick={enabled.google ? handleGoogle : undefined}
                   disabled={!enabled.google}
-                  title={enabled.google ? undefined : "Provider not configured"}
+                  title={enabled.google ? undefined : t.providerNotConfigured}
                   className="w-full"
                 >
                   <Chrome className="h-4 w-4 mr-2" /> {t.signInWithGoogle}
@@ -192,9 +202,7 @@ function LoginInner() {
                   variant="outline"
                   onClick={enabled.facebook ? handleFacebook : undefined}
                   disabled={!enabled.facebook}
-                  title={
-                    enabled.facebook ? undefined : "Provider not configured"
-                  }
+                  title={enabled.facebook ? undefined : t.providerNotConfigured}
                   className="w-full"
                 >
                   <Facebook className="h-4 w-4 mr-2" /> {t.signInWithFacebook}
@@ -208,7 +216,7 @@ function LoginInner() {
                       : undefined
                   }
                   disabled={!enabled.github}
-                  title={enabled.github ? undefined : "Provider not configured"}
+                  title={enabled.github ? undefined : t.providerNotConfigured}
                   className="w-full"
                 >
                   <Github className="h-4 w-4 mr-2" /> {t.signInWithGitHub}
@@ -222,9 +230,7 @@ function LoginInner() {
                       : undefined
                   }
                   disabled={!enabled.linkedin}
-                  title={
-                    enabled.linkedin ? undefined : "Provider not configured"
-                  }
+                  title={enabled.linkedin ? undefined : t.providerNotConfigured}
                   className="w-full"
                 >
                   <Linkedin className="h-4 w-4 mr-2" /> {t.signInWithLinkedIn}
@@ -270,11 +276,13 @@ function LoginInner() {
 }
 
 export default function LoginPage() {
+  const { language } = useLanguageStore();
+  const t = translations[language];
   return (
     <Suspense
       fallback={
         <MainLayout>
-          <div className="container mx-auto px-4 py-8">Loading...</div>
+          <div className="container mx-auto px-4 py-8">{t.loading}</div>
         </MainLayout>
       }
     >

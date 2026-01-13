@@ -74,6 +74,7 @@ async function buildAuthOptions(): Promise<NextAuthOptions> {
         else if (user && !(token as any).provider)
           (token as any).provider = "credentials";
         if (user?.email) token.email = user.email;
+        if (user?.id) token.sub = user.id;
         return token;
       },
       async session({ session, token }) {

@@ -45,15 +45,15 @@ export default function RegisterPage() {
     e.preventDefault();
     setError(null);
     if (!isValidEmail(email)) {
-      setError("Invalid email format");
+      setError(t.invalidEmailFormat);
       return;
     }
     if (password.length < 6) {
-      setError("Password must be at least 6 characters");
+      setError(t.passwordMinLength);
       return;
     }
     if (password !== confirm) {
-      setError("Passwords do not match");
+      setError(t.passwordsDoNotMatch);
       return;
     }
     try {
@@ -64,12 +64,12 @@ export default function RegisterPage() {
       });
       const data = await res.json();
       if (!res.ok) {
-        setError(data?.error || "Registration failed");
+        setError(data?.error || t.registrationFailed);
         return;
       }
       await signIn("credentials", { email, password, callbackUrl: "/" });
     } catch (err) {
-      setError("Server error, please try again later");
+      setError(t.serverError);
     }
   };
 
@@ -136,7 +136,7 @@ export default function RegisterPage() {
                 <div className="h-px bg-[#dbe5ec] w-full" />
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 gap-3">
                 <Button
                   type="button"
                   variant="outline"
@@ -146,7 +146,7 @@ export default function RegisterPage() {
                       : undefined
                   }
                   disabled={!enabled.google}
-                  title={enabled.google ? undefined : "Provider not configured"}
+                  title={enabled.google ? undefined : t.providerNotConfigured}
                   className="w-full"
                 >
                   <Chrome className="h-4 w-4 mr-2" /> {t.signInWithGoogle}
@@ -160,9 +160,7 @@ export default function RegisterPage() {
                       : undefined
                   }
                   disabled={!enabled.facebook}
-                  title={
-                    enabled.facebook ? undefined : "Provider not configured"
-                  }
+                  title={enabled.facebook ? undefined : t.providerNotConfigured}
                   className="w-full"
                 >
                   <Facebook className="h-4 w-4 mr-2" /> {t.signInWithFacebook}
@@ -176,7 +174,7 @@ export default function RegisterPage() {
                       : undefined
                   }
                   disabled={!enabled.github}
-                  title={enabled.github ? undefined : "Provider not configured"}
+                  title={enabled.github ? undefined : t.providerNotConfigured}
                   className="w-full"
                 >
                   <Github className="h-4 w-4 mr-2" /> {t.signInWithGitHub}
@@ -190,9 +188,7 @@ export default function RegisterPage() {
                       : undefined
                   }
                   disabled={!enabled.linkedin}
-                  title={
-                    enabled.linkedin ? undefined : "Provider not configured"
-                  }
+                  title={enabled.linkedin ? undefined : t.providerNotConfigured}
                   className="w-full"
                 >
                   <Linkedin className="h-4 w-4 mr-2" /> {t.signInWithLinkedIn}

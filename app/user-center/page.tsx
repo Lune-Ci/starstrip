@@ -96,11 +96,13 @@ interface SavedRoute {
 }
 
 export default function UserCenterPage() {
+  const { language } = useLanguageStore();
+  const t = translations[language] as any;
   return (
     <Suspense
       fallback={
         <MainLayout>
-          <div className="container mx-auto px-4 py-8">Loading...</div>
+          <div className="container mx-auto px-4 py-8">{t.loading}</div>
         </MainLayout>
       }
     >
@@ -111,6 +113,7 @@ export default function UserCenterPage() {
 
 function UserCenterContent() {
   const { profile, updateProfile } = useUserProfileStore();
+  const { user, guestId } = useAuthStore();
   const [saved, setSaved] = useState(false);
   const [savedRoutes, setSavedRoutes] = useState<SavedRoute[]>([]);
   const [isClient, setIsClient] = useState(false);
@@ -163,7 +166,7 @@ function UserCenterContent() {
         </div>
 
         <div className="space-y-4 md:space-y-6">
-          {/* Upgrade to Account Section */}
+          {/* Account Status Section */}
           <Card className="liquid-glass border-0 p-4 md:p-6 lg:p-8">
             <div className="flex items-start gap-3 md:gap-4 mb-4 md:mb-6">
               <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-[#5ba3d0]/20 flex items-center justify-center shrink-0">
@@ -171,20 +174,45 @@ function UserCenterContent() {
               </div>
               <div className="flex-1">
                 <h2 className="text-xl md:text-2xl font-bold text-[#1a3a52] mb-1 md:mb-2">
-                  {t.upgradeToFullAccount}
+                  {user
+                    ? t.accountInfo || "Account Info"
+                    : t.upgradeToFullAccount}
                 </h2>
-                <p className="text-sm md:text-base text-[#4a6b84] mb-3 md:mb-4">
-                  {t.upgradeDesc}
-                </p>
-                <Button
-                  className="bg-[#5ba3d0] hover:bg-[#4a92bf] text-white"
-                  onClick={() => {
-                    window.location.href =
-                      "/login?upgrade=1&redirect=/user-center";
-                  }}
-                >
-                  {t.upgradeNow}
-                </Button>
+                {user ? (
+                  <div className="space-y-2 mb-4">
+                    <p className="text-sm md:text-base text-[#4a6b84]">
+                      <span className="font-semibold">{t.userId}:</span> {user.id}
+                    </p>
+                    <p className="text-sm md:text-base text-[#4a6b84]">
+                      <span className="font-semibold">{t.email}:</span>{" "}
+                      {user.email}
+                    </p>
+                    <Badge
+                      variant="outline"
+                      className="text-[#5ba3d0] border-[#5ba3d0]"
+                    >
+                      {t.officialUser || "Official User"}
+                    </Badge>
+                  </div>
+                ) : (
+                  <>
+                    <p className="text-sm md:text-base text-[#4a6b84] mb-3 md:mb-4">
+                      <span className="font-semibold">{t.guestId}:</span> {guestId}
+                    </p>
+                    <p className="text-sm md:text-base text-[#4a6b84] mb-3 md:mb-4">
+                      {t.upgradeDesc}
+                    </p>
+                    <Button
+                      className="bg-[#5ba3d0] hover:bg-[#4a92bf] text-white"
+                      onClick={() => {
+                        window.location.href =
+                          "/login?upgrade=1&redirect=/user-center";
+                      }}
+                    >
+                      {t.upgradeNow}
+                    </Button>
+                  </>
+                )}
               </div>
             </div>
           </Card>
@@ -442,7 +470,7 @@ function UserCenterContent() {
                 </p>
                 {!isClient ? (
                   <div className="text-center py-8 bg-white/40 rounded-lg">
-                    <p className="text-[#4a6b84]">Loading...</p>
+                    <p className="text-[#4a6b84]">{t.loading}</p>
                   </div>
                 ) : savedRoutes.length > 0 ? (
                   <div className="space-y-3">

@@ -261,6 +261,13 @@ export const translations = {
     rememberMe: "Remember me",
     invalidEmailFormat: "Invalid email format",
     passwordMinLength: "Password must be at least 6 characters",
+    passwordsDoNotMatch: "Passwords do not match",
+    registrationFailed: "Registration failed",
+    serverError: "Server error, please try again later",
+    captchaLabel: "Captcha (arithmetic): enter the result of {a} {op} {b}",
+    captchaPlaceholder: "Enter the calculation result",
+    captchaVerified: "Verified",
+    captchaIncorrect: "Incorrect result, please try again",
     pleasePassCaptcha: "Please pass the captcha",
     emailPlaceholder: "you@example.com",
     passwordPlaceholder: "At least 6 characters",
@@ -281,6 +288,10 @@ export const translations = {
     signInOrUseGuestIDToContinue: "Sign in or use Guest ID to continue",
     chooseOptionBelow: "Choose one of the options below:",
     generateNewTrip: "Generate New Trip",
+    mergeFavoritesNotice:
+      "After signing in, your current favorites and routes will be merged.",
+    providerNotConfigured: "Provider not configured",
+    loading: "Loading...",
 
     // Attraction
     addToFavorites: "Add to Favorites",
@@ -311,9 +322,13 @@ export const translations = {
       "Discover and save cuisine you want to try",
     // User Center - Upgrade
     upgradeToFullAccount: "Upgrade to Full Account",
+    userId: "User ID",
+    guestId: "Guest ID",
     upgradeDesc:
-      "Log in with Apple or Google to upgrade from Guest. Your favorites and saved routes will be kept.",
+      "Sign in to upgrade from guest. Your favorites and routes will be saved.",
     upgradeNow: "Upgrade Now",
+    accountInfo: "Account Info",
+    officialUser: "Official User",
     // Common labels
     budget: "Budget",
     luxury: "Luxury",
@@ -527,6 +542,14 @@ export const translations = {
     rememberMe: "记住我",
     invalidEmailFormat: "邮箱格式不正确",
     passwordMinLength: "密码至少需要 6 位",
+    passwordsDoNotMatch: "两次输入的密码不一致",
+    invalidEmailOrPassword: "邮箱或密码错误",
+    registrationFailed: "注册失败",
+    serverError: "服务器错误，请稍后重试",
+    captchaLabel: "验证码（算术）：请输入 {a} {op} {b} 的结果",
+    captchaPlaceholder: "请输入计算结果",
+    captchaVerified: "验证通过",
+    captchaIncorrect: "结果不正确，请重试",
     pleasePassCaptcha: "请通过验证码",
     emailPlaceholder: "you@example.com",
     passwordPlaceholder: "至少 6 位字符",
@@ -546,6 +569,9 @@ export const translations = {
     signInOrUseGuestIDToContinue: "登录或使用游客 ID 继续",
     chooseOptionBelow: "请选择以下任一方式：",
     generateNewTrip: "生成新行程",
+    mergeFavoritesNotice: "登录后，您当前的收藏和路线将被合并。",
+    providerNotConfigured: "提供商未配置",
+    loading: "加载中...",
 
     // Attraction
     addToFavorites: "加入收藏",
@@ -576,9 +602,13 @@ export const translations = {
     discoverAndSaveRestaurantsYouWantToTry: "发现并保存你想尝试的美食",
     // User Center - Upgrade
     upgradeToFullAccount: "升级为正式账号",
+    userId: "用户 ID",
+    guestId: "游客 ID",
     upgradeDesc:
-      "使用 Apple 或 Google 登录即可从游客升级。你的收藏和已保存路线将被保留。",
+      "登录即可从游客升级。您的收藏和路线将被保存。",
     upgradeNow: "立即升级",
+    accountInfo: "账号信息",
+    officialUser: "正式用户",
     // User Center
     setPreferences: "设置你的偏好以获得个性化旅行推荐",
     nationality: "国籍",
@@ -792,6 +822,14 @@ export const translations = {
     rememberMe: "Recordarme",
     invalidEmailFormat: "Formato de correo inválido",
     passwordMinLength: "La contraseña debe tener al menos 6 caracteres",
+    passwordsDoNotMatch: "Las contraseñas no coinciden",
+    registrationFailed: "Registro fallido",
+    serverError: "Error del servidor, inténtelo de nuevo más tarde",
+    captchaLabel:
+      "Captcha (aritmética): introduzca el resultado de {a} {op} {b}",
+    captchaPlaceholder: "Ingrese el resultado del cálculo",
+    captchaVerified: "Verificado",
+    captchaIncorrect: "Resultado incorrecto, inténtelo de nuevo",
     pleasePassCaptcha: "Por favor, supera el captcha",
     emailPlaceholder: "tú@ejemplo.com",
     passwordPlaceholder: "Al menos 6 caracteres",
@@ -813,6 +851,10 @@ export const translations = {
       "Inicia sesión o usa un ID de invitado para continuar",
     chooseOptionBelow: "Elige una de las opciones a continuación:",
     generateNewTrip: "Generar nuevo viaje",
+    mergeFavoritesNotice:
+      "Después de iniciar sesión, tus favoritos y rutas actuales se fusionarán.",
+    providerNotConfigured: "Proveedor no configurado",
+    loading: "Cargando...",
     // User Center
     setPreferences:
       "Configura tus preferencias para obtener recomendaciones personalizadas",
@@ -886,6 +928,8 @@ export const translations = {
       "Descubre y guarda los restaurantes que quieres probar",
     // User Center - Upgrade
     upgradeToFullAccount: "Actualizar a Cuenta Completa",
+    userId: "ID de Usuario",
+    guestId: "ID de Invitado",
     upgradeDesc:
       "Inicia sesión con Apple o Google para actualizar desde Invitado. Tus favoritos y rutas guardadas se conservarán.",
     upgradeNow: "Actualizar ahora",
@@ -1175,6 +1219,13 @@ export const translations = {
     rememberMe: "Se souvenir de moi",
     invalidEmailFormat: "Format d'e-mail invalide",
     passwordMinLength: "Le mot de passe doit comporter au moins 6 caractères",
+    passwordsDoNotMatch: "Les mots de passe ne correspondent pas",
+    registrationFailed: "Échec de l'inscription",
+    serverError: "Erreur serveur, veuillez réessayer plus tard",
+    captchaLabel: "Captcha (arithmétique) : entrez le résultat de {a} {op} {b}",
+    captchaPlaceholder: "Entrez le résultat du calcul",
+    captchaVerified: "Vérifié",
+    captchaIncorrect: "Résultat incorrect, veuillez réessayer",
     pleasePassCaptcha: "Veuillez passer le captcha",
     emailPlaceholder: "vous@exemple.com",
     passwordPlaceholder: "Au moins 6 caractères",
@@ -1196,6 +1247,10 @@ export const translations = {
       "Connectez-vous ou utilisez un ID invité pour continuer",
     chooseOptionBelow: "Choisissez l'une des options ci-dessous :",
     generateNewTrip: "Générer un nouveau voyage",
+    mergeFavoritesNotice:
+      "Après la connexion, vos favoris et itinéraires actuels seront fusionnés.",
+    providerNotConfigured: "Fournisseur non configuré",
+    loading: "Chargement...",
 
     // User Center
     setPreferences:
@@ -1250,6 +1305,8 @@ export const translations = {
       "Découvrez et enregistrez les restaurants que vous souhaitez essayer",
     // User Center - Upgrade
     upgradeToFullAccount: "Passer au compte complet",
+    userId: "ID Utilisateur",
+    guestId: "ID Invité",
     upgradeDesc:
       "Connectez-vous avec Apple ou Google pour passer du mode invité. Vos favoris et itinéraires enregistrés seront conservés.",
     upgradeNow: "Mettre à niveau maintenant",
@@ -1403,6 +1460,13 @@ export const translations = {
     rememberMe: "تذكرني",
     invalidEmailFormat: "صيغة البريد الإلكتروني غير صحيحة",
     passwordMinLength: "يجب أن تكون كلمة المرور 6 أحرف على الأقل",
+    passwordsDoNotMatch: "كلمات المرور غير متطابقة",
+    registrationFailed: "فشل التسجيل",
+    serverError: "خطأ في الخادم، يرجى المحاولة مرة أخرى لاحقًا",
+    captchaLabel: "Captcha (حسابي): أدخل نتيجة {a} {op} {b}",
+    captchaPlaceholder: "أدخل نتيجة الحساب",
+    captchaVerified: "تم التحقق",
+    captchaIncorrect: "نتيجة غير صحيحة، يرجى المحاولة مرة أخرى",
     pleasePassCaptcha: "يرجى تجاوز اختبار التحقق",
     emailPlaceholder: "you@example.com",
     passwordPlaceholder: "على الأقل 6 أحرف",
@@ -1423,6 +1487,10 @@ export const translations = {
       "قم بتسجيل الدخول أو استخدم معرف الضيف للمتابعة",
     chooseOptionBelow: "اختر أحد الخيارات أدناه:",
     generateNewTrip: "إنشاء رحلة جديدة",
+    mergeFavoritesNotice:
+      "بعد تسجيل الدخول، سيتم دمج مفضلاتك ومساراتك الحالية.",
+    providerNotConfigured: "المزود غير مكون",
+    loading: "جار التحميل...",
     // User Center
     setPreferences: "اضبط تفضيلاتك للحصول على توصيات سفر مخصصة",
     nationality: "الجنسية",
@@ -1541,12 +1609,6 @@ export const translations = {
     tipLongerTripsDesc: "مدد فترة الرحلة",
     tipScenicRoutesTitle: "طرق ذات مناظر خلابة",
     tipScenicRoutesDesc: "اختر مسارات القطار",
-
-    // Navigation
-    navigation: "التنقل",
-    openMenu: "فتح القائمة",
-    changeLanguage: "تغيير اللغة",
-    closeMenu: "إغلاق القائمة",
     // Favorites
     myFavorites: "المفضلات الخاصة بي",
     yourSavedAttractionsAndRestaurants: "معالمك ومطاعمك المحفوظة",
@@ -1559,6 +1621,8 @@ export const translations = {
       "اكتشف واحفظ المطاعم التي تريد تجربتها",
     // User Center - Upgrade
     upgradeToFullAccount: "الترقية إلى حساب كامل",
+    userId: "معرف المستخدم",
+    guestId: "معرف الزائر",
     upgradeDesc:
       "سجّل الدخول باستخدام Apple أو Google للترقية من ضيف. ستُحفظ مفضلاتك ومساراتك.",
     upgradeNow: "قم بالترقية الآن",
@@ -1761,6 +1825,13 @@ export const translations = {
     rememberMe: "Запомнить меня",
     invalidEmailFormat: "Неверный формат электронной почты",
     passwordMinLength: "Пароль должен быть не менее 6 символов",
+    passwordsDoNotMatch: "Пароли не совпадают",
+    registrationFailed: "Ошибка регистрации",
+    serverError: "Ошибка сервера, пожалуйста, попробуйте позже",
+    captchaLabel: "Капча (арифметика): введите результат {a} {op} {b}",
+    captchaPlaceholder: "Введите результат вычисления",
+    captchaVerified: "Подтверждено",
+    captchaIncorrect: "Неверный результат, попробуйте еще раз",
     pleasePassCaptcha: "Пожалуйста, пройдите капчу",
     emailPlaceholder: "you@example.com",
     passwordPlaceholder: "Не менее 6 символов",
@@ -1781,6 +1852,10 @@ export const translations = {
       "Войдите или используйте гостевой ID, чтобы продолжить",
     chooseOptionBelow: "Выберите один из вариантов ниже:",
     generateNewTrip: "Создать новый маршрут",
+    mergeFavoritesNotice:
+      "После входа ваши текущие избранные и маршруты будут объединены.",
+    providerNotConfigured: "Провайдер не настроен",
+    loading: "Загрузка...",
     // User Center
     setPreferences:
       "Установите предпочтения, чтобы получать персональные рекомендации",
@@ -1873,6 +1948,8 @@ export const translations = {
       "Откройте и сохраните рестораны, которые хотите попробовать",
     // User Center - Upgrade
     upgradeToFullAccount: "Обновить до полноценного аккаунта",
+    userId: "ID пользователя",
+    guestId: "ID гостя",
     upgradeDesc:
       "Войдите через Apple или Google, чтобы перейти с гостевого режима. Ваши избранные и сохранённые маршруты будут сохранены.",
     upgradeNow: "Обновить сейчас",

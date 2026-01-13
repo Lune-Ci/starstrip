@@ -3,12 +3,16 @@
 import { useEffect, useMemo, useState } from "react"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { useLanguageStore } from "@/lib/language-store"
+import { translations } from "@/lib/translations"
 
 interface CaptchaProps {
   onValidChange?: (valid: boolean) => void
 }
 
 export function Captcha({ onValidChange }: CaptchaProps) {
+  const { language } = useLanguageStore()
+  const t = translations[language]
   const [a, setA] = useState(0)
   const [b, setB] = useState(0)
   const [op, setOp] = useState<"+" | "-">("+")
@@ -30,18 +34,23 @@ export function Captcha({ onValidChange }: CaptchaProps) {
     onValidChange?.(valid)
   }, [valid, onValidChange])
 
+  const label = t.captchaLabel
+    .replace("{a}", String(a))
+    .replace("{op}", op)
+    .replace("{b}", String(b))
+
   return (
     <div className="space-y-2">
-      <Label>Captcha (arithmetic): enter the result of {a} {op} {b}</Label>
+      <Label>{label}</Label>
       <Input
         type="number"
         inputMode="numeric"
-        placeholder="Enter the calculation result"
+        placeholder={t.captchaPlaceholder}
         value={answer}
         onChange={(e) => setAnswer(e.target.value)}
       />
       <p className={`text-sm ${valid ? "text-green-600" : "text-red-600"}`}>
-        {valid ? "Verified" : "Incorrect result, please try again"}
+        {valid ? t.captchaVerified : t.captchaIncorrect}
       </p>
     </div>
   )
