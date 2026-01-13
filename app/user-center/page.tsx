@@ -1,6 +1,7 @@
 "use client";
 
 import { useAuthStore } from "@/lib/auth-store";
+import { PriceDisplay } from "@/components/price-display";
 import { MainLayout } from "@/components/main-layout";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -471,9 +472,13 @@ function UserCenterContent() {
                               {route.dateRange.to}
                             </p>
                             <p className="text-xs text-[#4a6b84] mt-1">
-                              {route.itinerary.length} days • ¥
-                              {Math.round(route.totalCost)} •{" "}
-                              {Math.round(route.totalCarbon)} kg CO₂
+                              {route.itinerary.length} days •{" "}
+                              <PriceDisplay
+                                amount={route.totalCost}
+                                className="text-inherit"
+                                variant="inline-sm"
+                              />{" "}
+                              • {Math.round(route.totalCarbon)} kg CO₂
                             </p>
                           </div>
                           <div className="text-right">

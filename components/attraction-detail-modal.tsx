@@ -194,9 +194,11 @@ export function AttractionDetailModal({
                   {t.costLabel}
                 </span>
               </div>
-              <p className="text-xl font-bold text-[#1a3a52] break-words">
-                ¥{attraction.cost}
-              </p>
+              <PriceDisplay
+                amount={attraction.cost}
+                className="text-xl font-bold text-[#1a3a52] break-words"
+                variant="default"
+              />
             </div>
             <div className="bg-white/60 rounded-lg p-4">
               <div className="flex items-center gap-2 mb-1">

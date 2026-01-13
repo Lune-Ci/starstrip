@@ -18,6 +18,8 @@ import {
 import { useLanguageStore } from "@/lib/language-store";
 import { translations } from "@/lib/translations";
 
+import { PriceDisplay } from "@/components/price-display";
+
 interface AttractionCardProps {
   attraction: Attraction;
   onViewDetails?: (attraction: Attraction) => void;
@@ -134,7 +136,7 @@ export function AttractionCard({
 
   return (
     <>
-      <Card className="liquid-glass border-0 overflow-hidden hover:shadow-xl transition-all group">
+      <Card className="liquid-glass border-0 overflow-hidden hover:shadow-xl transition-all group h-full flex flex-col">
         <div className="relative aspect-[4/3] overflow-hidden">
           <img
             src={resolveAttractionImage()}
@@ -165,7 +167,7 @@ export function AttractionCard({
           </Badge>
         </div>
 
-        <div className="p-4">
+        <div className="p-4 flex flex-col flex-1">
           <h3 className="text-xl font-bold text-[#1a3a52] mb-2 line-clamp-2 min-h-[3.5rem]">
             {getAttractionName(attraction.id, attraction.name, language)}
           </h3>
@@ -175,7 +177,7 @@ export function AttractionCard({
             <span className="text-sm">{getCityLabel(attraction.city)}</span>
           </div>
 
-          <div className="grid grid-cols-3 gap-2 mb-4">
+          <div className="flex flex-col gap-2 mb-4 mt-auto">
             <div className="flex items-center gap-1">
               <Clock className="h-4 w-4 text-[#5ba3d0]" />
               <span className="text-xs text-[#4a6b84]">
@@ -184,7 +186,11 @@ export function AttractionCard({
             </div>
             <div className="flex items-center gap-1">
               <DollarSign className="h-4 w-4 text-[#5ba3d0]" />
-              <span className="text-xs text-[#4a6b84]">¥{attraction.cost}</span>
+              <PriceDisplay
+                amount={attraction.cost}
+                className="text-xs text-[#4a6b84]"
+                variant="inline-sm"
+              />
             </div>
             <div className="flex items-center gap-1">
               <Leaf className="h-4 w-4 text-[#5ba3d0]" />
@@ -195,12 +201,14 @@ export function AttractionCard({
           </div>
 
           {onViewDetails && (
-            <Button
-              onClick={() => onViewDetails(attraction)}
-              className="w-full bg-[#5ba3d0] hover:bg-[#4a92bf] text-white"
-            >
-              {t.viewDetails}
-            </Button>
+            <div className="mt-auto">
+              <Button
+                onClick={() => onViewDetails(attraction)}
+                className="w-full bg-[#5ba3d0] hover:bg-[#4a92bf] text-white"
+              >
+                {t.viewDetails}
+              </Button>
+            </div>
           )}
         </div>
       </Card>

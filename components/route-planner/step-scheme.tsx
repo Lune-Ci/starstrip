@@ -17,6 +17,7 @@ import { cn, getAttractionName, getMealName } from "@/lib/utils";
 import { generateRoute, calculateRouteTotals } from "@/lib/route-generator";
 import { useLanguageStore } from "@/lib/language-store";
 import { translations } from "@/lib/translations";
+import { PriceDisplay } from "@/components/price-display";
 
 interface StepSchemeProps {
   selectedScheme: RouteScheme | null;
@@ -251,7 +252,11 @@ export function StepScheme({
                       <DollarSign className="h-3 w-3 text-[#5ba3d0]" />
                     </div>
                     <div className="font-semibold text-[#1a3a52]">
-                      ¥{Math.round(preview.cost)}
+                      <PriceDisplay
+                        amount={preview.cost}
+                        className="text-inherit"
+                        variant="tooltip"
+                      />
                     </div>
                     <div className="text-[#4a6b84]">{t.cost}</div>
                   </div>

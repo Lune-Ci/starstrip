@@ -2,17 +2,23 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { usePathname } from "next/navigation"
 import { TopBar } from "./top-bar"
 import { SideNav } from "./side-nav"
 import { translations, type Language } from "@/lib/translations"
 import { useLanguageStore } from "@/lib/language-store"
+import { useCurrencyStore } from "@/lib/currency-store"
 
 export function MainLayout({ children }: { children: React.ReactNode }) {
   const [isNavOpen, setIsNavOpen] = useState(false)
   const pathname = usePathname()
   const { language, setLanguage } = useLanguageStore()
+  const fetchRates = useCurrencyStore((state) => state.fetchRates)
+
+  useEffect(() => {
+    fetchRates()
+  }, [fetchRates])
 
   const currentTranslations = translations[language]
 

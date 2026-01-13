@@ -38,6 +38,8 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
+import { PriceDisplay } from "@/components/price-display";
+
 export default function CuisinePage() {
   const { language } = useLanguageStore();
   const t = translations[language];
@@ -318,7 +320,7 @@ export default function CuisinePage() {
             return (
               <Card
                 key={meal.id}
-                className="liquid-glass border-0 overflow-hidden hover:shadow-xl transition-all group"
+                className="liquid-glass border-0 overflow-hidden hover:shadow-xl transition-all group h-full flex flex-col"
               >
                 <div className="relative aspect-[4/3] overflow-hidden">
                   <img
@@ -352,7 +354,7 @@ export default function CuisinePage() {
                   </Badge>
                 </div>
 
-                <div className="p-4">
+                <div className="p-4 flex flex-col flex-1">
                   <h3 className="text-xl font-bold text-[#1a3a52] mb-2 line-clamp-2 min-h-[3.5rem]">
                     {getMealName(meal.id, meal.name, language)}
                   </h3>
@@ -362,26 +364,33 @@ export default function CuisinePage() {
                     <span className="text-sm">{getCityLabel(meal.city)}</span>
                   </div>
 
-                  <div className="flex flex-wrap gap-2 mb-2">
-                    <Badge variant="outline" className="text-xs whitespace-normal text-center h-auto py-1">
+                  <div className="flex flex-col items-start gap-2 mb-2">
+                    <Badge
+                      variant="outline"
+                      className="text-xs whitespace-normal text-center h-auto py-1"
+                    >
                       {getCuisineLabel(meal.cuisine)}
                     </Badge>
-                    <Badge variant="secondary" className="text-xs whitespace-normal text-center h-auto py-1">
+                    <Badge
+                      variant="secondary"
+                      className="text-xs whitespace-normal text-center h-auto py-1"
+                    >
                       {getTypeLabel(meal.type)}
                     </Badge>
                   </div>
 
-                  <div className="flex items-center justify-between mt-3">
+                  <div className="flex flex-col gap-2 mt-auto pt-2">
                     <div className="flex items-center gap-1">
-                      <DollarSign className="h-4 w-4 text-[#5ba3d0]" />
-                      <span className="text-sm font-semibold text-[#1a3a52]">
-                        ¥{meal.cost}
-                      </span>
+                      <PriceDisplay
+                        amount={meal.cost}
+                        className="text-[#1a3a52]"
+                        variant="inline-sm"
+                      />
                     </div>
                     <div className="flex items-center gap-1">
                       <Leaf className="h-4 w-4 text-[#5ba3d0]" />
                       <span className="text-xs text-[#4a6b84]">
-                        {meal.carbonFootprint}kg
+                        {meal.carbonFootprint}kg {t.co2}
                       </span>
                     </div>
                   </div>

@@ -31,6 +31,8 @@ import {
 import { useLanguageStore } from "@/lib/language-store";
 import { translations } from "@/lib/translations";
 
+import { PriceDisplay } from "@/components/price-display";
+
 function ensureDate(date: Date | string | null): Date | null {
   if (!date) return null;
   return safeDate(date);
@@ -223,7 +225,7 @@ export default function ItineraryPage() {
     state.selectedScheme,
     state.startLocation,
     isGenerating,
-    updateState
+    updateState,
   ]);
 
   const fromDate = ensureDate(state.dateRange.from);
@@ -415,9 +417,13 @@ export default function ItineraryPage() {
                     {t.budget}
                   </span>
                 </div>
-                <p className="text-xl md:text-2xl font-bold text-[#1a3a52]">
-                  ¥{Math.round(state.totalCost)}
-                </p>
+                <div className="text-xl md:text-2xl font-bold text-[#1a3a52]">
+                  <PriceDisplay
+                    amount={state.totalCost}
+                    className="text-inherit"
+                    variant="default"
+                  />
+                </div>
               </div>
 
               <div className="text-center">
@@ -510,10 +516,11 @@ export default function ItineraryPage() {
                             <Clock className="h-3 w-3 md:h-4 md:w-4" />
                             {attraction.duration}h
                           </span>
-                          <span className="flex items-center gap-1">
-                            <DollarSign className="h-3 w-3 md:h-4 md:w-4" />¥
-                            {attraction.cost}
-                          </span>
+                          <PriceDisplay
+                            amount={attraction.cost}
+                            className="text-inherit"
+                            variant="inline-sm"
+                          />
                           <span className="flex items-center gap-1">
                             <Leaf className="h-3 w-3 md:h-4 md:w-4" />
                             {attraction.carbonFootprint}kg
@@ -577,9 +584,11 @@ export default function ItineraryPage() {
                               {getCuisineLabel(meal.cuisine)}
                             </p>
                             <div className="flex items-center gap-2 md:gap-3 text-[10px] md:text-xs text-[#4a6b84]">
-                              <span className="flex items-center gap-1">
-                                <DollarSign className="h-3 w-3" />¥{meal.cost}
-                              </span>
+                              <PriceDisplay
+                                amount={meal.cost}
+                                className="text-inherit"
+                                variant="inline-sm"
+                              />
                               <span className="flex items-center gap-1">
                                 <Leaf className="h-3 w-3" />
                                 {meal.carbonFootprint}kg

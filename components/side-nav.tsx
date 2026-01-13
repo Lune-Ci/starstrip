@@ -1,10 +1,20 @@
 "use client";
 
-import { X, Home, User, Route, MapPin, Heart, Leaf, UtensilsCrossed } from "lucide-react";
+import {
+  X,
+  Home,
+  User,
+  Route,
+  MapPin,
+  Heart,
+  Leaf,
+  UtensilsCrossed,
+} from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import type { TranslationKey } from "@/lib/translations";
+import { ExchangeRateWidget } from "./exchange-rate-widget";
 
 interface SideNavProps {
   isOpen: boolean;
@@ -85,6 +95,8 @@ export function SideNav({
               );
             })}
           </nav>
+
+          <ExchangeRateWidget />
         </div>
       </aside>
     </>

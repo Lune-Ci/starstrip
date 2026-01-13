@@ -12,6 +12,7 @@ import { Heart, UtensilsCrossed } from "lucide-react";
 import { useLanguageStore } from "@/lib/language-store";
 import { translations } from "@/lib/translations";
 import { getMealName } from "@/lib/utils";
+import { PriceDisplay } from "@/components/price-display";
 
 export default function FavoritesPage() {
   const fav = useFavoritesStore();
@@ -186,9 +187,11 @@ export default function FavoritesPage() {
                     <p className="text-sm text-[#4a6b84] mb-2">
                       {getCuisineLabel(restaurant.cuisine)}
                     </p>
-                    <p className="text-lg font-semibold text-[#5ba3d0]">
-                      ¥{restaurant.cost}
-                    </p>
+                    <PriceDisplay
+                      amount={restaurant.cost}
+                      className="text-lg font-semibold text-[#5ba3d0]"
+                      variant="stack"
+                    />
                   </Card>
                 ))}
               </div>
