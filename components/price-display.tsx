@@ -7,10 +7,10 @@ import { useLanguageStore } from "@/lib/language-store";
 import { translations } from "@/lib/translations";
 import { useEffect, useState } from "react";
 import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 
 interface PriceDisplayProps {
   amount: number;
@@ -118,25 +118,27 @@ export function PriceDisplay({
 
   if (variant === "tooltip") {
     return (
-      <Tooltip>
-        <TooltipTrigger asChild>
+      <Popover>
+        <PopoverTrigger asChild>
           <span
+            role="button"
+            tabIndex={0}
             className={cn(
-              "font-bold cursor-help border-b border-dotted border-current/50",
+              "font-bold cursor-pointer border-b border-dotted border-current/50 outline-none",
               className
             )}
           >
             {CURRENCIES.CNY.symbol}
             {amount}
           </span>
-        </TooltipTrigger>
-        <TooltipContent>
-          <p>
+        </PopoverTrigger>
+        <PopoverContent className="w-auto p-2 text-sm bg-white/95 backdrop-blur-sm border-white/40 shadow-xl">
+          <p className="font-medium text-[#1a3a52]">
             {approxLabel} {targetSymbol}
             {formattedConverted}
           </p>
-        </TooltipContent>
-      </Tooltip>
+        </PopoverContent>
+      </Popover>
     );
   }
 
