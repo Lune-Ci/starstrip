@@ -76,17 +76,17 @@ export default function HomePage() {
           </h2>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
             {[
-              { name: "Beijing", image: "/beijing-great-wall.jpg" },
-              { name: "Shanghai", image: "/shanghai-skyline.jpg" },
-              { name: "Xi'an", image: "/terracotta-warriors.jpg" },
-              { name: "Guilin", image: "/guilin-li-river.jpg" },
+              { key: "cityBeijing", image: "/beijing-great-wall.jpg" },
+              { key: "cityShanghai", image: "/shanghai-skyline.jpg" },
+              { key: "cityXian", image: "/terracotta-warriors.jpg" },
+              { key: "cityGuilin", image: "/guilin-li-river.jpg" },
             ].map((city) => (
-              <Link key={city.name} href="/attractions">
+              <Link key={city.key} href="/attractions">
                 <div className="group cursor-pointer">
                   <div className="relative overflow-hidden rounded-xl mb-2 md:mb-3 aspect-[4/3]">
                     <img
                       src={city.image || "/placeholder.svg"}
-                      alt={city.name}
+                      alt={t[city.key as keyof typeof t]}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                       onError={(e) => {
                         const img = e.currentTarget as HTMLImageElement
@@ -95,7 +95,9 @@ export default function HomePage() {
                       }}
                     />
                   </div>
-                  <h3 className="text-base md:text-xl font-semibold text-[#1a3a52] text-center">{city.name}</h3>
+                  <h3 className="text-base md:text-xl font-semibold text-[#1a3a52] text-center">
+                    {t[city.key as keyof typeof t]}
+                  </h3>
                 </div>
               </Link>
             ))}
