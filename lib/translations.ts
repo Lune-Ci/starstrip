@@ -263,6 +263,7 @@ export const translations = {
     passwordMinLength: "Password must be at least 6 characters",
     passwordsDoNotMatch: "Passwords do not match",
     registrationFailed: "Registration failed",
+    invalidEmailOrPassword: "Invalid email or password",
     serverError: "Server error, please try again later",
     captchaLabel: "Captcha (arithmetic): enter the result of {a} {op} {b}",
     captchaPlaceholder: "Enter the calculation result",
@@ -325,10 +326,12 @@ export const translations = {
     userId: "User ID",
     guestId: "Guest ID",
     upgradeDesc:
-      "Sign in to upgrade from guest. Your favorites and routes will be saved.",
+      "Sign in with Email or Social Account to upgrade from guest. Your favorites and routes will be saved.",
     upgradeNow: "Upgrade Now",
     accountInfo: "Account Info",
     officialUser: "Official User",
+    loadRouteConfirmation: "Load this route into the planner?",
+    dayUnit: "days",
     // Common labels
     budget: "Budget",
     luxury: "Luxury",
@@ -604,11 +607,12 @@ export const translations = {
     upgradeToFullAccount: "升级为正式账号",
     userId: "用户 ID",
     guestId: "游客 ID",
-    upgradeDesc:
-      "登录即可从游客升级。您的收藏和路线将被保存。",
+    upgradeDesc: "登录即可从游客升级。您的收藏和路线将被保存。",
     upgradeNow: "立即升级",
     accountInfo: "账号信息",
     officialUser: "正式用户",
+    loadRouteConfirmation: "是否将此路线加载到规划器？",
+    dayUnit: "天",
     // User Center
     setPreferences: "设置你的偏好以获得个性化旅行推荐",
     nationality: "国籍",
@@ -824,6 +828,7 @@ export const translations = {
     passwordMinLength: "La contraseña debe tener al menos 6 caracteres",
     passwordsDoNotMatch: "Las contraseñas no coinciden",
     registrationFailed: "Registro fallido",
+    invalidEmailOrPassword: "Correo electrónico o contraseña inválidos",
     serverError: "Error del servidor, inténtelo de nuevo más tarde",
     captchaLabel:
       "Captcha (aritmética): introduzca el resultado de {a} {op} {b}",
@@ -933,6 +938,10 @@ export const translations = {
     upgradeDesc:
       "Inicia sesión con Apple o Google para actualizar desde Invitado. Tus favoritos y rutas guardadas se conservarán.",
     upgradeNow: "Actualizar ahora",
+    accountInfo: "Información de la cuenta",
+    officialUser: "Usuario Oficial",
+    loadRouteConfirmation: "¿Cargar esta ruta en el planificador?",
+    dayUnit: "días",
     // Common labels
     budget: "Económico",
     luxury: "Lujo",
@@ -1310,9 +1319,14 @@ export const translations = {
     upgradeDesc:
       "Connectez-vous avec Apple ou Google pour passer du mode invité. Vos favoris et itinéraires enregistrés seront conservés.",
     upgradeNow: "Mettre à niveau maintenant",
+    accountInfo: "Infos compte",
+    officialUser: "Utilisateur Officiel",
+    loadRouteConfirmation: "Charger cet itinéraire dans le planificateur ?",
+    dayUnit: "jours",
     // Common labels
     budget: "Économique",
     luxury: "Luxe",
+    invalidEmailOrPassword: "E-mail ou mot de passe invalide",
   },
   ar: {
     // Navigation
@@ -1629,6 +1643,11 @@ export const translations = {
     // Common labels
     budget: "اقتصادي",
     luxury: "فاخر",
+    invalidEmailOrPassword: "البريد الإلكتروني أو كلمة المرور غير صحيحة",
+    accountInfo: "معلومات الحساب",
+    officialUser: "مستخدم رسمي",
+    loadRouteConfirmation: "هل تريد تحميل هذا المسار في المخطط؟",
+    dayUnit: "أيام",
   },
   ru: {
     // Navigation
@@ -1827,6 +1846,7 @@ export const translations = {
     passwordMinLength: "Пароль должен быть не менее 6 символов",
     passwordsDoNotMatch: "Пароли не совпадают",
     registrationFailed: "Ошибка регистрации",
+    invalidEmailOrPassword: "Неверный email или пароль",
     serverError: "Ошибка сервера, пожалуйста, попробуйте позже",
     captchaLabel: "Капча (арифметика): введите результат {a} {op} {b}",
     captchaPlaceholder: "Введите результат вычисления",
@@ -1951,8 +1971,12 @@ export const translations = {
     userId: "ID пользователя",
     guestId: "ID гостя",
     upgradeDesc:
-      "Войдите через Apple или Google, чтобы перейти с гостевого режима. Ваши избранные и сохранённые маршруты будут сохранены.",
+      "Войдите через Email или соцсети, чтобы перейти с гостевого режима. Ваши избранные и сохранённые маршруты будут сохранены.",
     upgradeNow: "Обновить сейчас",
+    accountInfo: "Информация об аккаунте",
+    officialUser: "Официальный пользователь",
+    loadRouteConfirmation: "Загрузить этот маршрут в планировщик?",
+    dayUnit: "дней",
     // Common labels
     budget: "Бюджетный",
     luxury: "Премиум",

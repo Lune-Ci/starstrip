@@ -181,7 +181,8 @@ function UserCenterContent() {
                 {user ? (
                   <div className="space-y-2 mb-4">
                     <p className="text-sm md:text-base text-[#4a6b84]">
-                      <span className="font-semibold">{t.userId}:</span> {user.id}
+                      <span className="font-semibold">{t.userId}:</span>{" "}
+                      {user.id}
                     </p>
                     <p className="text-sm md:text-base text-[#4a6b84]">
                       <span className="font-semibold">{t.email}:</span>{" "}
@@ -197,7 +198,8 @@ function UserCenterContent() {
                 ) : (
                   <>
                     <p className="text-sm md:text-base text-[#4a6b84] mb-3 md:mb-4">
-                      <span className="font-semibold">{t.guestId}:</span> {guestId}
+                      <span className="font-semibold">{t.guestId}:</span>{" "}
+                      {guestId}
                     </p>
                     <p className="text-sm md:text-base text-[#4a6b84] mb-3 md:mb-4">
                       {t.upgradeDesc}
@@ -478,7 +480,7 @@ function UserCenterContent() {
                       .sort(
                         (a, b) =>
                           new Date(b.savedAt).getTime() -
-                          new Date(a.savedAt).getTime()
+                          new Date(a.savedAt).getTime(),
                       )
                       .map((route) => (
                         <div
@@ -486,7 +488,12 @@ function UserCenterContent() {
                           className="bg-white/60 rounded-lg p-4 flex items-center justify-between hover:bg-white/80 transition-colors cursor-pointer"
                           onClick={() => {
                             // Load route into planner
-                            if (confirm("Load this route into the planner?")) {
+                            if (
+                              confirm(
+                                t.loadRouteConfirmation ||
+                                  "Load this route into the planner?",
+                              )
+                            ) {
                               window.location.href = "/route-planner";
                             }
                           }}
@@ -500,7 +507,7 @@ function UserCenterContent() {
                               {route.dateRange.to}
                             </p>
                             <p className="text-xs text-[#4a6b84] mt-1">
-                              {route.itinerary.length} days •{" "}
+                              {route.itinerary.length} {t.dayUnit || "days"} •{" "}
                               <PriceDisplay
                                 amount={route.totalCost}
                                 className="text-inherit"

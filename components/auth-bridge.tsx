@@ -76,7 +76,7 @@ export function AuthBridge() {
           }));
 
           // Finally clear guestId in auth store
-          useAuthStore.setState({ guestId: null });
+          mergeGuestDataToUser();
         }
       }
     } else if (status === "unauthenticated") {

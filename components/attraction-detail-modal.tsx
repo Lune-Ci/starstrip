@@ -21,6 +21,7 @@ import { useFavoritesStore } from "@/lib/favorites-store";
 import { cn, getAttractionName } from "@/lib/utils";
 import { useLanguageStore } from "@/lib/language-store";
 import { translations } from "@/lib/translations";
+import { PriceDisplay } from "@/components/price-display";
 
 interface AttractionDetailModalProps {
   attraction: Attraction | null;
@@ -255,7 +256,7 @@ export function AttractionDetailModal({
                 "flex-1",
                 isFavorited
                   ? "border-red-500 text-red-500 hover:bg-red-50"
-                  : "border-[#5ba3d0] text-[#5ba3d0] hover:bg-[#5ba3d0]/10"
+                  : "border-[#5ba3d0] text-[#5ba3d0] hover:bg-[#5ba3d0]/10",
               )}
             >
               <Heart
